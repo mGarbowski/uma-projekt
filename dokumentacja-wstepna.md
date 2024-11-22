@@ -63,4 +63,4 @@ Zbiór danych Estimation of Obesity Levels Based On Eating Habits and Physical C
 
 ### Iris (https://archive.ics.uci.edu/dataset/53/iris)
 
-Zbiór danych Iris z repozytorium UCI Machine Learning jest jednym z najbardziej znanych i często używanych zestawów danych w dziedzinie uczenia maszynowego. Został wprowadzony przez Ronalda A. Fishera w 1936 roku i służy do klasyfikacji trzech gatunków irysów na podstawie czterech cech morfologicznych.
+Zbiór danych Iris służy do klasyfikacji trzech gatunków irysów na podstawie czterech cech morfologicznych.
