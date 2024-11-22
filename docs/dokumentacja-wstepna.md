@@ -183,7 +183,7 @@ Klasyfikator binarny rozstrzyga do której klasy z pary należy przykład.
 Do trenowania klasyfikatora binarnego dla pary klas A i B użyjemy takiego podzbioru zbioru trenującego, który zawiera tylko przykłady klas A i B.
 
 Predykcja zespołu klasyfikatorów będzie wyznaczana przez głosowanie. 
-Ze względu na możliwość uzyskania jednakowej liczby głosów przez wiele klas przy zliczaniu głosów jako liczby modeli które przewidują daną klasę, proponujemy poniższy sposób obliczania głosów ważonych stopniem pewności predykcji
+Ze względu na możliwość remisu przy zliczaniu głosów jako liczby modeli które przewidują daną klasę, proponujemy poniższy sposób obliczania głosów ważonych stopniem pewności predykcji
 (stopień predykcji definiowany jak w poprzednim wariancie).
 
 Przykład dla klas A, B i C:
