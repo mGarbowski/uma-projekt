@@ -16,8 +16,46 @@ Proszę zapoznać się z radami z sekcji: Sposób oceny.
 
 Dokumentację wstępną należy wysłać e-mailem. W temacie proszę napisać UMA, a załącznik proszę nazwać tak jak imię i nazwisko autora, np. JanKowalski.pdf. 
 
-## Precyzyjny opis algorytmy
-Mikołaj
+## Temat
+Tematem projektu jest implementacja klasyfikatora dla problemów wieloklasowych, opartego o algorytm ID3 oraz porównanie jego jakości z dwoma wariantami.
+
+Wariant pierwszy polega na stworzeniu dla każdej klasy klasyfikatora binarnego (dla klasy A - klasa pozytywna to A, klasa negatywna to wszystkie pozostałe z oryginalnego problemu). Wynikiem predykcji będzie ta klasa, dla której klasyfikator binarny przypisze klasę pozytywną z największym stopniem pewności.
+
+Wariant drugi polega na stworzeniu osobnego klasyfikatora binarnego dla każdej pary klas, gdzie jedna jest traktowana jako klasa pozytywna, a druga jako negatywna. Model dokonuje predykcji przez głosowanie.
+
+## Precyzyjny opis algorytmu
+
+### Algorytm ID3
+...
+
+### Wariant z n klasyfikatorów binarnych
+
+Dla problemu klasyfikacji z liczbą klas równą $n$ powstanie $n$ modeli klasyfikacji binarnej według algorytmu ID3.
+
+Dla pojedynczego modelu dla klasy $c$, modyfikujemy etykiety w zbiorze danych - przypisujemy klasę pozytywną w miejsce klasy $c$, przypisujemy klasę negatywną w miejsce wszystkich pozostałych.
+
+Przy tworzeniu liścia, poza klasą większościową zapamiętujemy również częstość występowania przykładów klasy większościowej w zbiorze przykładów rozważanym w danym liściu. W przypadku jednakowej klasy dla wszystkich przykładów - wartość 1, w pozostałych przypadkach - wartość z przedziału $(0,1)$. Częstość potraktujemy jako stopień pewności modelu co do decyzji.
+
+Wynikiem predykcji zespołu modeli będzie ta klasa, którą model binarny zaklasyfikował pozytywnie z największą pewnością.
+
+Przykładowo, dla klas A, B, C, D
+
+| Model binarny dla klasy | A   | B   | C   | D   |
+|-------------------------|-----|-----|-----|-----|
+| Wynik (0/1)             | 1   | 0   | 1   | 0   |
+| Pewność                 | 0.8 | 0.7 | 0.7 | 0.9 |
+
+Predykcją zespołu modeli będzie klasa A, ponieważ zarówno model binarny dla klasy A i C dał pozytywny wynik klasyfikacji, ale model dla klasy A miał większą pewność.
+
+Jeśli wszystkie modele binarne dadzą predykcję negatywną, predykcją zespołu modeli będzie ta klasa, która została zaklasyfikowana negatywnie z najmniejszą pewnością. Przykład:
+
+| Model binarny dla klasy | A   | B   | C   | D   |
+|-------------------------|-----|-----|-----|-----|
+| Wynik (0/1)             | 0   | 0   | 0   | 0   |
+| Pewność                 | 0.9 | 0.7 | 0.8 | 0.5 |
+
+Predykcją zespołu modeli będzie klasa D, ponieważ wszystkie predykcje dają klasę negatywną, ale model dla klasy D ma najmniejszą pewność
+
 
 ## Plan eksperymentów
 Mikołaj
