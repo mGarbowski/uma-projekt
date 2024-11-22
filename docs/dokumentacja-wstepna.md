@@ -28,7 +28,132 @@ a druga jako negatywna. Model dokonuje predykcji przez głosowanie.
 ## Precyzyjny opis algorytmu
 
 ### Algorytm ID3
-...
+
+Opracowane na podstawie wykładów z przedmiotów UMA (2024Z, Paweł Cichosz) i WSI (2023Z, Paweł Zawistowski)
+
+Algorytm ID3 jest metodą indukcji drzew decyzyjnych.
+Drzewo budowane jest rekurencyjnie zaczynając od korzenia.
+Węzły nieterminalne odpowiadają podziałowi zbioru uczącego na podstawie wartości wybranego atrybutu.
+Gałęzie odpowiadają konkretnej wartości atrybutu użytego do podziału.
+Liście zawierają klasę (predykcję) i stopień pewności (rozkład prawdopodobieństwa klas).
+
+Proces predykcji dla wybranego przykładu polega na przejściu od korzenia drzewa do liścia, w każdym węźle wybierając
+gałąź, która odpowiada wartości atrybutu użytego do podziału w przykładzie, wynikiem predykcji jest klasa w liściu.
+
+#### Pseudokod
+```
+Wejścje: 
+    Y - zbiór klas
+    D - zbiór atrybutów wejściowych
+    U - zbiór par uczących
+
+jeśli jednakowa klasa y dla wszystkich przykładów
+    zwróć liść z klasą y
+
+jeśli D jest pusty
+    zwróć liść zawierający klasę większościową w T
+
+d = argmax InfGain(d, T)
+{T_1, T_2, ...} = podział zbioru T po atrybucie d
+węzły potomne = {ID3(Y, D-{d}, T_1), ID3(Y, D-{d}, T_2), ...}
+
+zwróć drzewo z korzeniem d i gałęziami prowadzącymi do węzłów potomnych
+
+```
+
+
+#### Podział zbioru uczącego w węźle
+Algorytm ID3 stosuje podziały wielowartościowe na podstawie wartości atrybutu - z węzła (nieterminalnego) 
+wychodzi po 1 gałęzi dla każdej wartości atrybutu dyskretnego.
+
+Do podziału zbioru atrybutów w węźle wybiera się ten atrybut, który daje największą zdobycz informacyjną przy podziale definiowaną jako:
+
+$$ InfGain(d, T) = I(T) - Inf(d, T) $$
+
+$$ Inf(d, T) = \sum_j \frac{|T_j|}{|T|} \cdot I(T_j) $$
+
+$$ I(T) = - \sum_i f_i \cdot \log(f_i) $$
+
+Gdzie:
+
+* $d$ - atrybut użyty do podziału
+* $T$ - zbiór trenujący
+* $T_j$ - podzbiór $T$, gdzie każdy przykład ma $j$-tą wartość atrybutu $d$
+* $f_i$ - częstość $i$-tej klasy w zbiorze
+* $InfGain$ - zdobycz informacyjna
+* $Inf$ - entropia zbioru $T$ podzielonego na podzbiory przez atrybut $d$
+* $I$ - entropia zbioru $T$
+
+#### Kryterium stopu
+W kroku algorytmu tworzony jest liść jeśli wszystkie przykłady podzbioru zbioru uczącego mają jednakową klasę (wybierana jest ta klasa z pewnością 1) lub jeśli nie ma już atrybutów do kolejnego podziału - wybierana jest klasa większościowa z pewnością równą częstości występowania tej klasy w podzbiorze uczącym ($f_i$).
+
+W przypadku, kiedy w przykładzie dla którego wyznaczana jest predykcja pojawia się wartość atrybutu, dla której nie istnieje gałąź w drzewie, wynikiem predykcji będzie klasa większościowa w węźle nieterminalnym (tym z którego brakuje gałęzi).
+
+#### Przykładowe obliczenia
+
+**Jednolita klasa**
+
+Dla zbioru trenującego
+
+| $x_1$ | $x_2$ | $y$ |
+|-------|-------|-----|
+| A     | 1     | 0   |
+| B     | 2     | 0   |
+| C     | 3     | 0   |
+
+Wszystkie przykłady mają jednakową klasę więc tworzony jest liść z klasą 0 i pewnością 1.
+
+**Brak atrybutów do podziału**
+
+| | $y$ |
+|-|-----|
+| | 0   |
+| | 1   |
+| | 1   |
+
+Nie ma atrybutów do dalszego podziału, tworzony jest liść z klasą większościową 1 i pewnością $2/3$
+
+**Obliczanie zdobyczy informacyjnej**
+
+Dla $T$:
+
+| $x_1$ | $x_2$ | $y$ |
+|-------|-------|-----|
+| A     | 1     | 0   |
+| B     | 1     | 1   |
+| B     | 2     | 1   |
+| B     | 2     | 0   |
+| B     | 3     | 1   |
+
+Podział po atrybucie $x_1$
+
+$T_A$:
+
+| $x_1$ | $x_2$ | $y$ |
+|-------|-------|-----|
+| A     | 1     | 0   |
+
+$T_B$:
+
+| $x_1$ | $x_2$ | $y$ |
+|-------|-------|-----|
+| B     | 1     | 1   |
+| B     | 2     | 1   |
+| B     | 2     | 0   |
+| B     | 3     | 1   |
+
+
+
+$$I(T) = -2/5 \log(2/5) - 3/5 \log(3/5) \simeq 0.67$$
+
+$$I(T_A) = 0$$
+
+$$I(T_B) = -1/4 \log(1/4) - 3/4 \log(3/4) \simeq 0.56$$
+
+$$InfGain(x_1, T) = I(T) - \frac{|T_A|}{|T|}I(T_A) - \frac{|T_B|}{|T|}I(T_B)$$
+
+$$InfGain(x_1, T) \simeq 0.67 - 0.2 \cdot 0 - 0.8 \cdot 0.56 \simeq 0.22$$
+
 
 ### Wariant z n klasyfikatorów binarnych
 
