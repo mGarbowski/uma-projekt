@@ -43,7 +43,7 @@ Przykładowo, dla klas A, B, C, D
 | Model binarny dla klasy | A   | B   | C   | D   |
 |-------------------------|-----|-----|-----|-----|
 | Wynik (0/1)             | 1   | 0   | 1   | 0   |
-| Pewność                 | 0.8 | 0.7 | 0.7 | 0.9 |
+| Pewność                 | 0,8 | 0,7 | 0,7 | 0,9 |
 
 Predykcją zespołu modeli będzie klasa A, ponieważ zarówno model binarny dla klasy A i C dał pozytywny wynik klasyfikacji, ale model dla klasy A miał większą pewność.
 
@@ -52,10 +52,11 @@ Jeśli wszystkie modele binarne dadzą predykcję negatywną, predykcją zespoł
 | Model binarny dla klasy | A   | B   | C   | D   |
 |-------------------------|-----|-----|-----|-----|
 | Wynik (0/1)             | 0   | 0   | 0   | 0   |
-| Pewność                 | 0.9 | 0.7 | 0.8 | 0.5 |
+| Pewność                 | 0,9 | 0,7 | 0,8 | 0,5 |
 
 Predykcją zespołu modeli będzie klasa D, ponieważ wszystkie predykcje dają klasę negatywną, ale model dla klasy D ma najmniejszą pewność
 
+### Wariant z głosowaniem
 
 ## Plan eksperymentów
 Mikołaj
