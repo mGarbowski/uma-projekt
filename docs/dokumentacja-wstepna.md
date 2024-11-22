@@ -132,15 +132,15 @@ $T_B$:
 
 
 
-$$I(T) = -2/5 \log(2/5) - 3/5 \log(3/5) \simeq 0.67$$
+$$I(T) = -2/5 \log(2/5) - 3/5 \log(3/5) \simeq 0,67$$
 
 $$I(T_A) = 0$$
 
-$$I(T_B) = -1/4 \log(1/4) - 3/4 \log(3/4) \simeq 0.56$$
+$$I(T_B) = -1/4 \log(1/4) - 3/4 \log(3/4) \simeq 0,56$$
 
 $$InfGain(x_1, T) = I(T) - \frac{|T_A|}{|T|}I(T_A) - \frac{|T_B|}{|T|}I(T_B)$$
 
-$$InfGain(x_1, T) \simeq 0.67 - 0.2 \cdot 0 - 0.8 \cdot 0.56 \simeq 0.22$$
+$$InfGain(x_1, T) \simeq 0,67 - 0,2 \cdot 0 - 0,8 \cdot 0,56 \simeq 0,22$$
 
 
 ### Wariant z n klasyfikatorów binarnych
