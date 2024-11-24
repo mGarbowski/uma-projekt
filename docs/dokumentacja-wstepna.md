@@ -8,14 +8,15 @@ pandoc -o docs/MikolajGarbowski_MichalPalasz.pdf docs/dokumentacja-wstepna.md -V
 * Michał Pałasz
 
 ## Temat
-Tematem projektu jest implementacja klasyfikatora dla problemów wieloklasowych, opartego o algorytm ID3 oraz porównanie jego jakości z dwoma wariantami.
+Implementacja drzewa decyzyjnego, porównanie sposobu radzenia sobie z problemami wieloklasowymi, 
+czyli porównanie jakości wyników typowej implementacji ID3 z jakością wyników dwóch podejść: 
 
-Wariant pierwszy polega na stworzeniu dla każdej klasy klasyfikatora binarnego (dla klasy A - klasa pozytywna to A, 
-klasa negatywna to wszystkie pozostałe z oryginalnego problemu). Wynikiem predykcji będzie ta klasa, dla której klasyfikator binarny 
-przypisze klasę pozytywną z największym stopniem pewności.
+1) tworzymy osobny model binarny dla każdej klasy (jedna klasa traktowana jako pozytywna, wszystkie pozostałe jako negatywne), 
+predykcja przez wybór klasy o maksymalnej wartości funkcji decyzyjnej (wymaga posiadania przez każdy klasyfikator 
+„stopnia pewności siebie”, co można zdefiniować na wiele sposobów). 
+2) tworzymy osobny model binarny dla każdej pary klas (jedna klasa traktowana jako pozytywna, druga jako negatywna), 
+predykcja przez głosowanie. 
 
-Wariant drugi polega na stworzeniu osobnego klasyfikatora binarnego dla każdej pary klas, gdzie jedna jest traktowana jako klasa pozytywna, 
-a druga jako negatywna. Model dokonuje predykcji przez głosowanie.
 
 ## Opis algorytmu
 
