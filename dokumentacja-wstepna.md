@@ -1,6 +1,8 @@
 ## Miary jakości 
 
-W celu oceny jakości klasyfikacji zastosowane zostaną poniższe metryki, które pozwalają na dokładną analizę wyników modeli. Aby zastosować miary jakości recall, precision, f-measure, i specificity w przypadku drzewa decyzyjnego klasyfikującego do więcej niż dwóch klas, zostaną wykorzystane następujące podejścia:
+W celu oceny jakości klasyfikacji zastosowane zostaną poniższe metryki, które pozwalają na dokładną analizę wyników modeli. 
+Aby zastosować miary jakości *recall*, *precision*, *f-measure*, i *specificity* 
+w przypadku drzewa decyzyjnego klasyfikującego do więcej niż dwóch klas, zostaną wykorzystane następujące podejścia:
 
 ### Binaryzacja problemu wieloklasowego
 
@@ -39,7 +41,7 @@ $$ F = \dfrac{2 * Recall * Precision}{Recall + Precision} $$
 
 ### Specyficzność (Specificity)
 
-Współcznynnik prawdziwych negatywnych, określający jak dobrze klasyfikator potrafi zidentyfikować negatywne przypadki.
+Współczynnik prawdziwych negatywnych, określający jak dobrze klasyfikator potrafi zidentyfikować negatywne przypadki.
 
 $$ Specificity = \dfrac{TN}{TN + FP} $$
 
