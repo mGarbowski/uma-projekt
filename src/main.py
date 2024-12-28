@@ -7,6 +7,7 @@ from src.classifiers.one_vs_one import OneVsOneClassifier
 from src.classifiers.one_vs_rest import OneVsRestClassifier
 from src.dataset.dataset import Dataset
 from src.evaluation.confusion_matrix import ConfusionMatrix
+from src.evaluation.kcv import kcv
 
 
 def test_model_on_dataset(model_class: Type[Classifier], dataset: Dataset):
@@ -22,13 +23,16 @@ def main():
     nursery = Dataset.load_from_file("datasets/nursery/nursery.data")
     balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data")
 
-    datasets = [car_evaluation, nursery, balance_scale]
+    datasets = [(car_evaluation, "car evaluation"), (nursery, "nursery"), (balance_scale, "balance scale")]
     models = [ID3Classifier, OneVsRestClassifier, OneVsOneClassifier]
 
-    for dataset in datasets:
+    for named_dataset in datasets:
+        dataset, dataset_name = named_dataset
         for model in models:
-            print(f"Model: {model.__name__}")
-            test_model_on_dataset(model, dataset)
+            print(f"Model: {model.__name__}, Dataset: {dataset_name}")
+            micro, macro = kcv(model, dataset, 5)
+            print(f"Micro-averaged results: {micro}")
+            print(f"Macro-averaged results: {macro}")
             print("")
 
 
