@@ -11,6 +11,9 @@ class ConfusionMatrix:
 
         self._matrix = matrix
 
+    def labels(self) -> list[str]:
+        return list(self._matrix.keys())
+
     @classmethod
     def from_labels(cls, actual_labels: list[str], predicted_labels: list[str]) -> Self:
         if len(actual_labels) != len(predicted_labels):

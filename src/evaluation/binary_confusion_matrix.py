@@ -20,13 +20,22 @@ class BinaryConfusionMatrix:
 
     @classmethod
     def from_multiclass(cls, matrix: ConfusionMatrix, positive_label: str) -> Self:
-        negative_labels = list(matrix.matrix.keys())
+        negative_labels = matrix.labels()
         negative_labels.remove(positive_label)
 
         tp = matrix.matrix[positive_label][positive_label]
         fp = sum(matrix.matrix[neg_actual][positive_label] for neg_actual in negative_labels)
         fn = sum(matrix.matrix[positive_label][neg_predicted] for neg_predicted in negative_labels)
         tn = sum(matrix.matrix[negative][negative] for negative in negative_labels)
+
+        return cls(tp, tn, fp, fn)
+
+    @classmethod
+    def sum(cls, matrices: list[Self]) -> Self:
+        tp = sum(matrix.true_positives for matrix in matrices)
+        tn = sum(matrix.true_negatives for matrix in matrices)
+        fp = sum(matrix.false_positives for matrix in matrices)
+        fn = sum(matrix.false_negatives for matrix in matrices)
 
         return cls(tp, tn, fp, fn)
 
@@ -43,3 +52,9 @@ class BinaryConfusionMatrix:
 
     def specificity(self) -> float:
         return self.true_negatives / (self.true_negatives + self.false_positives)
+
+    def tp_rate(self) -> float:
+        return self.recall()
+
+    def fp_rate(self) -> float:
+        return self.false_positives / (self.false_positives + self.true_negatives)
