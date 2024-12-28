@@ -14,6 +14,7 @@ class Dataset:
 
     attributes and classes are of equal length
     """
+
     _attributes: list[RowAttributes]
     _labels: list[Label]
 

@@ -1,8 +1,8 @@
 from itertools import combinations
 from typing import Self
 
-from .id3 import ID3Classifier
 from .classifier import Classifier
+from .id3 import ID3Classifier
 from ..dataset.dataset import RowAttributes, Label, Dataset
 
 Pair = tuple[Label, Label]

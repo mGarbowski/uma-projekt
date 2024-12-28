@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Self
 
-from src.dataset.dataset import Dataset, Label, RowAttributes
+from ..dataset.dataset import Dataset, Label, RowAttributes
 
 
 class Classifier(ABC):

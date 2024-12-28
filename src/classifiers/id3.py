@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Self
 
 from .classifier import Classifier
-from src.dataset.dataset import Dataset, RowAttributes, Label
+from ..dataset.dataset import Dataset, RowAttributes, Label
 
 
 def entropy(dataset: Dataset) -> float:
@@ -71,6 +71,7 @@ class Node:
 class WeightedPrediction:
     label: str
     weight: float
+
 
 class ID3Classifier(Classifier):
     _root: Node
