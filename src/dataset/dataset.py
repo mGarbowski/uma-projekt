@@ -108,6 +108,43 @@ class Dataset:
         random.shuffle(zipped)
         self._attributes, self._labels = zip(*zipped)
 
+    def kcv_split(self, k: int, i: int) -> tuple[Self, Self]:
+        """Return 2 datasets for the i-th iteration of k-fold cross-validation
+
+        The dataset is split into k parts (sizes differ by at most 1)
+        The first dataset in the pair is the sum of all parts except the i-th
+        The second dataset in the pair is the i-th part
+        """
+        if k <= 1:
+            raise ValueError("k must be greater than 1")
+        if i < 0 or i >= k:
+            raise ValueError("idx must be between 0 and k-1")
+
+        sizes = [len(self.attributes) // k] * k
+        for j in range(len(self.attributes) % k):
+            sizes[j] += 1
+
+        train_attributes = []
+        train_labels = []
+        test_attributes = []
+        test_labels = []
+
+        for j in range(k):
+            start = sum(sizes[:j])
+            end = start + sizes[j]
+
+            if j == i:
+                test_attributes.extend(self.attributes[start:end])
+                test_labels.extend(self.labels[start:end])
+            else:
+                train_attributes.extend(self.attributes[start:end])
+                train_labels.extend(self.labels[start:end])
+
+        train_set = Dataset(train_attributes, train_labels)
+        test_set = Dataset(test_attributes, test_labels)
+        return train_set, test_set
+
+
     @classmethod
     def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:

@@ -60,6 +60,7 @@ def test_subset_with_labels():
     )
     assert dataset.subset_with_labels({"C", "B"}) == expected
 
+
 def test_shuffle():
     dataset = Dataset(
         [("1", "2"), ("3", "4"), ("5", "6"), ("7", "8")],
@@ -75,3 +76,25 @@ def test_shuffle():
     assert dataset.attributes.index(("3", "4")) == dataset.labels.index("B")
     assert dataset.attributes.index(("5", "6")) == dataset.labels.index("C")
     assert dataset.attributes.index(("7", "8")) == dataset.labels.index("D")
+
+
+def test_kcv_split():
+    dataset = Dataset(
+        [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
+         ("10", "10")],
+        ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
+    )
+    train_set, test_set = dataset.kcv_split(3, 0)
+    assert train_set == Dataset([("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"), ("10", "10")],
+                                ["B", "B", "B", "B", "C", "C"])
+    assert test_set == Dataset([("1", "1"), ("2", "2"), ("3", "3"), ("4", "4")], ["A", "A", "A", "A"])
+
+    train_set, test_set = dataset.kcv_split(3, 1)
+    assert train_set == Dataset([("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("8", "8"), ("9", "9"), ("10", "10")],
+                                ["A", "A", "A", "A", "B", "C", "C"])
+    assert test_set == Dataset([("5", "5"), ("6", "6"), ("7", "7")], ["B", "B", "B"])
+
+    train_set, test_set = dataset.kcv_split(3, 2)
+    assert train_set == Dataset([("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7")],
+                                ["A", "A", "A", "A", "B", "B", "B"])
+    assert test_set == Dataset([("8", "8"), ("9", "9"), ("10", "10")], ["B", "C", "C"])
