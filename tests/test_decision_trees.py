@@ -1,6 +1,6 @@
 from pytest import approx
 
-from src.classifiers.decision_trees import Dataset, entropy, most_common_element
+from src.classifiers.id3 import Dataset, entropy, most_common_element
 
 
 def test_zero_entropy():

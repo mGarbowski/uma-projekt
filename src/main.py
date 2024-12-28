@@ -1,7 +1,7 @@
 from pprint import pprint
 
 from classifiers.dataset import Dataset
-from classifiers.decision_trees import DecisionTreeClassifier
+from classifiers.id3 import ID3Classifier
 from evaluation.confusion_matrix import ConfusionMatrix
 
 
@@ -22,7 +22,7 @@ def evaluate_on_dataset(
     for _ in range(n_times):
         train_set, test_set = dataset.train_test_split(split_ratio)
         n_test_set_samples = len(test_set.attributes)
-        model = DecisionTreeClassifier.train(train_set)
+        model = ID3Classifier.train(train_set)
         evaluation = model.evaluate(test_set, positive_label, negative_label)
         evaluations.append(evaluation)
 
@@ -62,7 +62,7 @@ def main():
     nursery = Dataset.load_from_file("datasets/nursery/nursery.data")
     balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data")
 
-    model = DecisionTreeClassifier.train(car_evaluation)
+    model = ID3Classifier.train(car_evaluation)
     predictions = model.predict(car_evaluation.attributes)
     predicted_labels = [pred[0] for pred in predictions]
     actual_labels = car_evaluation.labels

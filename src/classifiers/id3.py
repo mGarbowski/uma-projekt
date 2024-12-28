@@ -87,7 +87,7 @@ class Node:
         )
 
 
-class DecisionTreeClassifier:
+class ID3Classifier:
     _root: Node
 
     def __init__(self, root: Node):
