@@ -2,6 +2,7 @@ import math
 from dataclasses import dataclass
 from typing import Self
 
+from .classifier import Classifier
 from .dataset import Dataset, RowAttributes, Label
 
 
@@ -45,27 +46,6 @@ def most_common_element[T](elements: list[T]) -> tuple[T, float]:
 
 
 @dataclass
-class Evaluation:
-    true_positives: int = 0
-    true_negatives: int = 0
-    false_positives: int = 0
-    false_negatives: int = 0
-
-    def recall(self) -> float:
-        return self.true_positives / (self.true_positives + self.false_negatives)
-
-    def specificity(self) -> float:
-        return self.true_negatives / (self.false_positives + self.true_negatives)
-
-    def precision(self) -> float:
-        return self.true_positives / (self.true_positives + self.false_positives)
-
-    def accuracy(self) -> float:
-        return (self.true_positives + self.true_negatives) / (
-                self.true_positives + self.true_negatives + self.false_positives + self.false_negatives)
-
-
-@dataclass
 class Node:
     children: dict[str, Self]
     leaf_label: str | None
@@ -87,7 +67,7 @@ class Node:
         )
 
 
-class ID3Classifier:
+class ID3Classifier(Classifier):
     _root: Node
 
     def __init__(self, root: Node):
@@ -99,8 +79,8 @@ class ID3Classifier:
         root = build_decision_tree(dataset, attribute_idxs)
         return cls(root)
 
-    def predict_single(self, row_attributes: RowAttributes) -> tuple[Label, float]:
-        """Predict label based on attributes"""
+    def predict_single_with_weight(self, row_attributes: RowAttributes) -> tuple[Label, float]:
+        """Predict label based on attributes, include weight of the prediction"""
         node = self._root
         while not node.is_leaf():
             attribute_value = row_attributes[node.split_attribute_idx]
@@ -111,28 +91,13 @@ class ID3Classifier:
 
         return node.leaf_label, node.weight
 
-    def predict(self, attributes: list[RowAttributes]) -> list[tuple[Label, float]]:
-        """Predict label based on attributes for each row"""
-        return [self.predict_single(row_attributes) for row_attributes in attributes]
+    def predict_single(self, row_attributes: RowAttributes) -> Label:
+        label, _ = self.predict_single_with_weight(row_attributes)
+        return label
 
-    def evaluate(self, test_set: Dataset, positive_label: str, negative_label: str) -> Evaluation:
-        """Ratio of correct predictions to all predictions"""
-        actual_labels = test_set.labels
-        predicted_labels = self.predict(test_set.attributes)
-        evaluation = Evaluation()
-        for a, p in zip(actual_labels, predicted_labels):
-            if a == positive_label and p == positive_label:
-                evaluation.true_positives += 1
-            elif a == negative_label and p == negative_label:
-                evaluation.true_negatives += 1
-            elif a == positive_label and p == negative_label:
-                evaluation.false_negatives += 1
-            elif a == negative_label and p == positive_label:
-                evaluation.false_positives += 1
-            else:
-                raise ValueError("Labels are not binary")
-
-        return evaluation
+    def predict_with_weights(self, attributes: list[RowAttributes]) -> list[tuple[Label, float]]:
+        """Predict label based on attributes for each row, include weight of the prediction"""
+        return [self.predict_single_with_weight(row_attributes) for row_attributes in attributes]
 
 
 def build_decision_tree(

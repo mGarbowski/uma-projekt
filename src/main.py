@@ -64,10 +64,9 @@ def main():
 
     model = ID3Classifier.train(car_evaluation)
     predictions = model.predict(car_evaluation.attributes)
-    predicted_labels = [pred[0] for pred in predictions]
     actual_labels = car_evaluation.labels
-    confusion_matrix = ConfusionMatrix.from_labels(actual_labels, predicted_labels)
-    print(confusion_matrix)
+    confusion_matrix = ConfusionMatrix.from_labels(actual_labels, predictions)
+    pprint(confusion_matrix.matrix)
 
 
 if __name__ == '__main__':
