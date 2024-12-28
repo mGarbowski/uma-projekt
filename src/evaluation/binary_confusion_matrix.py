@@ -40,21 +40,36 @@ class BinaryConfusionMatrix:
         return cls(tp, tn, fp, fn)
 
     def recall(self) -> float:
-        return self.true_positives / (self.true_positives + self.false_negatives)
+        try:
+            return self.true_positives / (self.true_positives + self.false_negatives)
+        except ZeroDivisionError:
+            return 0.0
 
     def precision(self) -> float:
-        return self.true_positives / (self.true_positives + self.false_positives)
+        try:
+            return self.true_positives / (self.true_positives + self.false_positives)
+        except ZeroDivisionError:
+            return 0.0
 
     def f_measure(self) -> float:
         precision = self.precision()
         recall = self.recall()
-        return 2 * precision * recall / (precision + recall)
+        try:
+            return 2 * precision * recall / (precision + recall)
+        except ZeroDivisionError:
+            return 0.0
 
     def specificity(self) -> float:
-        return self.true_negatives / (self.true_negatives + self.false_positives)
+        try:
+            return self.true_negatives / (self.true_negatives + self.false_positives)
+        except ZeroDivisionError:
+            return 0.0
 
     def tp_rate(self) -> float:
         return self.recall()
 
     def fp_rate(self) -> float:
-        return self.false_positives / (self.false_positives + self.true_negatives)
+        try:
+            return self.false_positives / (self.false_positives + self.true_negatives)
+        except ZeroDivisionError:
+            return 0.0
