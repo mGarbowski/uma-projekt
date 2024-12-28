@@ -28,3 +28,7 @@ class ConfusionMatrix:
 
     def __repr__(self):
         return str(self._matrix)
+
+    @property
+    def matrix(self) -> dict[str, dict[str, int]]:
+        return self._matrix
