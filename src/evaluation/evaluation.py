@@ -5,6 +5,7 @@ from typing import Self
 from src.evaluation.binary_confusion_matrix import BinaryConfusionMatrix
 from src.evaluation.confusion_matrix import ConfusionMatrix
 
+
 @dataclass
 class Evaluation:
     recall: float
@@ -50,4 +51,3 @@ class Evaluation:
             tp_rate=mean(e.tp_rate for e in evaluations),
             fp_rate=mean(e.fp_rate for e in evaluations)
         )
-

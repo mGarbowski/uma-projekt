@@ -2,9 +2,9 @@ from typing import Type
 
 from src.classifiers.classifier import Classifier
 from src.dataset.dataset import Dataset
+from src.evaluation.aggregate_evaluation import AggregateEvaluation
 from src.evaluation.confusion_matrix import ConfusionMatrix
 from src.evaluation.evaluation import Evaluation
-from src.evaluation.aggregate_evaluation import AggregateEvaluation
 
 
 def kcv(model_class: Type[Classifier], dataset: Dataset, k: int) -> tuple[AggregateEvaluation, AggregateEvaluation]:
@@ -25,4 +25,6 @@ def kcv(model_class: Type[Classifier], dataset: Dataset, k: int) -> tuple[Aggreg
         evaluations_micro.append(Evaluation.micro_average(confusion_matrix))
         evaluations_macro.append(Evaluation.macro_average(confusion_matrix))
 
-    return AggregateEvaluation(evaluations_micro), AggregateEvaluation(evaluations_macro)
+    micro_aggregate = AggregateEvaluation.from_evaluations(evaluations_micro)
+    macro_aggregate = AggregateEvaluation.from_evaluations(evaluations_macro)
+    return micro_aggregate, macro_aggregate
