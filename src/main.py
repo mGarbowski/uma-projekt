@@ -55,38 +55,12 @@ def remove_missing_values(dataset: Dataset, empty_symbol: str) -> Dataset:
 
 
 def main():
-    mushroom = Dataset.load_from_file("datasets/mushroom/agaricus-lepiota.data")
-    breast_cancer = Dataset.load_from_file("datasets/breast+cancer/breast-cancer.data")
-    breast_cancer_no_missing_values = remove_missing_values(breast_cancer, "?")
+    car_evaluation = Dataset.load_from_file("datasets/car+evaluation/car.data")
+    nursery = Dataset.load_from_file("datasets/nursery/nursery.data")
+    balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data")
 
-    # evaluate_on_dataset(
-    #     mushroom,
-    #     "mushroom",
-    #     positive_label="e",
-    #     negative_label="p"
-    # )
-
-    evaluate_on_dataset(
-        breast_cancer,
-        "breast cancer",
-        positive_label="no-recurrence-events",
-        negative_label="recurrence-events",
-    )
-    #
-    # evaluate_on_dataset(
-    #     breast_cancer_no_missing_values,
-    #     "breast cancer without missing values",
-    #     positive_label="no-recurrence-events",
-    #     negative_label="recurrence-events",
-    # )
-    #
-    # evaluate_on_dataset(
-    #     breast_cancer,
-    #     "breast cancer",
-    #     positive_label="no-recurrence-events",
-    #     negative_label="recurrence-events",
-    #     split_ratio=0.4
-    # )
+    model = DecisionTreeClassifier.train(car_evaluation)
+    pass
 
 
 if __name__ == '__main__':
