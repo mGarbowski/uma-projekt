@@ -1,5 +1,5 @@
 import random
-from typing import Self
+from typing import Self, Iterable
 
 RowAttributes = tuple[str, ...]
 Label = str
@@ -91,7 +91,7 @@ class Dataset:
     def unique_labels(self) -> set[Label]:
         return set(self.labels)
 
-    def subset_with_labels(self, labels: set[Label]) -> Self:
+    def subset_with_labels(self, labels: Iterable[Label]) -> Self:
         new_attributes = []
         new_labels = []
         for attrs, label in zip(self.attributes, self.labels):
