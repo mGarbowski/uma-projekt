@@ -21,11 +21,10 @@ class OneVsRestClassifier(Classifier):
 
     @classmethod
     def train(cls, dataset: Dataset) -> Self:
-        trees = {}
-        for label in dataset.unique_labels():
-            binarized_dataset = dataset.binarize_labels(label)
-            tree = ID3Classifier.train(binarized_dataset)
-            trees[label] = tree
+        trees = {
+            label: ID3Classifier.train(dataset.binarize_labels(label))
+            for label in dataset.unique_labels()
+        }
         return cls(trees)
 
     def predict_single(self, row_attributes: RowAttributes) -> Label:
@@ -33,6 +32,6 @@ class OneVsRestClassifier(Classifier):
         positive_predictions = {label: pred for label, pred in predictions.items() if pred[0] == label}
 
         if len(positive_predictions) == 0:
-            return min(predictions, key=lambda k: predictions[k][1])[0]
+            return min(predictions, key=lambda label: predictions[label][1])[0]
 
-        return max(positive_predictions, key=lambda k: positive_predictions[k][1])[0]
+        return max(positive_predictions, key=lambda label: positive_predictions[label][1])[0]
