@@ -91,6 +91,16 @@ class Dataset:
     def unique_labels(self) -> set[Label]:
         return set(self.labels)
 
+    def subset_with_labels(self, labels: set[Label]) -> Self:
+        new_attributes = []
+        new_labels = []
+        for attrs, label in zip(self.attributes, self.labels):
+            if label in labels:
+                new_attributes.append(attrs)
+                new_labels.append(label)
+
+        return Dataset(new_attributes, new_labels)
+
     @classmethod
     def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:

@@ -46,3 +46,15 @@ def test_unique_labels():
         ["A", "C", "B", "B"]
     )
     assert dataset.unique_labels() == {"A", "C", "B"}
+
+
+def test_subset_with_labels():
+    dataset = Dataset(
+        [("1", "2"), ("5", "1"), ("6", "3"), ("2", "3"), ("1", "2")],
+        ["A", "C", "B", "D", "B"]
+    )
+    expected = Dataset(
+        [("5", "1"), ("6", "3"), ("1", "2")],
+        ["C", "B", "B"]
+    )
+    assert dataset.subset_with_labels({"C", "B"}) == expected
