@@ -5,7 +5,6 @@ from typing import Self
 from .dataset import Dataset, RowAttributes, Label
 
 
-
 def entropy(dataset: Dataset) -> float:
     return sum(
         - (label_frequency := dataset.labels.count(unique_label) / dataset.size()) * math.log(label_frequency, 2)
