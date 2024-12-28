@@ -1,3 +1,5 @@
+from pytest import approx
+
 from src.classifiers.decision_trees import Dataset, entropy, most_common_element
 
 
@@ -49,4 +51,6 @@ def test_split_dataset():
 
 def test_most_common_element():
     elements = [1, 6, 4, 2, 6, 1, 2, 2]
-    assert most_common_element(elements) == 2
+    element, weight = most_common_element(elements)
+    assert element == 2
+    assert weight == approx(3 / 8)
