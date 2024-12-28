@@ -2,6 +2,7 @@ from pprint import pprint
 
 from classifiers.dataset import Dataset
 from classifiers.decision_trees import DecisionTreeClassifier
+from evaluation.confusion_matrix import ConfusionMatrix
 
 
 def avg(values: list) -> float:
@@ -63,7 +64,10 @@ def main():
 
     model = DecisionTreeClassifier.train(car_evaluation)
     predictions = model.predict(car_evaluation.attributes)
-    pprint(predictions)
+    predicted_labels = [pred[0] for pred in predictions]
+    actual_labels = car_evaluation.labels
+    confusion_matrix = ConfusionMatrix.from_labels(actual_labels, predicted_labels)
+    print(confusion_matrix)
 
 
 if __name__ == '__main__':
