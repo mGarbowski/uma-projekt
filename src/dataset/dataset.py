@@ -88,6 +88,9 @@ class Dataset:
         new_labels = [positive_label if label == positive_label else "other" for label in self.labels]
         return Dataset(self.attributes, new_labels)
 
+    def unique_labels(self) -> set[Label]:
+        return set(self.labels)
+
     @classmethod
     def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:

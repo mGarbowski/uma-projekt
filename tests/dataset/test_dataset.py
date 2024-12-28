@@ -38,3 +38,11 @@ def test_binarize_labels():
         ["A", "other", "other", "other"]
     )
     assert dataset.binarize_labels("A") == expected
+
+
+def test_unique_labels():
+    dataset = Dataset(
+        [("1", "2"), ("5", "1"), ("6", "3"), ("1", "2")],
+        ["A", "C", "B", "B"]
+    )
+    assert dataset.unique_labels() == {"A", "C", "B"}
