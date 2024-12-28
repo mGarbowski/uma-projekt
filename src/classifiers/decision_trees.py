@@ -1,10 +1,9 @@
 import math
 from dataclasses import dataclass
-from typing import TypeVar
+from typing import Self
 
 from .dataset import Dataset, RowAttributes, Label
 
-T = TypeVar('T')
 
 
 def entropy(dataset: Dataset) -> float:
@@ -33,7 +32,7 @@ def best_split_idx(dataset: Dataset, unused_attribute_idxs: set[int]) -> int:
     )
 
 
-def most_common_element(elements: list[T]) -> tuple[T, float]:
+def most_common_element[T](elements: list[T]) -> tuple[T, float]:
     counts = {}
     for element in elements:
         if element not in counts:
@@ -69,7 +68,7 @@ class Evaluation:
 
 @dataclass
 class Node:
-    children: dict[str, 'Node']
+    children: dict[str, Self]
     leaf_label: str | None
     weight: float
     most_common_label: str  # fallback for intermediate nodes with no corresponding children
@@ -79,7 +78,7 @@ class Node:
         return self.leaf_label is not None
 
     @classmethod
-    def leaf(cls, label: str, weight: float) -> 'Node':
+    def leaf(cls, label: str, weight: float) -> Self:
         return cls(
             children={},
             leaf_label=label,
@@ -96,7 +95,7 @@ class DecisionTreeClassifier:
         self._root = root
 
     @classmethod
-    def train(cls, dataset: Dataset) -> 'DecisionTreeClassifier':
+    def train(cls, dataset: Dataset) -> Self:
         attribute_idxs = set(range(len(dataset.attributes[0])))
         root = build_decision_tree(dataset, attribute_idxs)
         return cls(root)

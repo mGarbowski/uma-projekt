@@ -1,4 +1,5 @@
 import random
+from typing import Self
 
 RowAttributes = tuple[str, ...]
 Label = str
@@ -28,7 +29,7 @@ class Dataset:
         self._attributes = attributes if attributes is not None else []
         self._labels = labels if labels is not None else []
 
-    def __eq__(self, other: 'Dataset') -> bool:
+    def __eq__(self, other: Self) -> bool:
         return self.attributes == other.attributes and self.labels == other.labels
 
     def __getitem__(self, index: int) -> tuple[RowAttributes, Label]:
@@ -52,7 +53,7 @@ class Dataset:
         self._attributes.append(row_attributes)
         self._labels.append(row_label)
 
-    def split_by_attribute(self, attribute_idx: int) -> list['Dataset']:
+    def split_by_attribute(self, attribute_idx: int) -> list[Self]:
         unique_attribute_values = set(data_point[attribute_idx] for data_point in self._attributes)
         new_datasets = {attr_value: Dataset() for attr_value in unique_attribute_values}
 
@@ -62,7 +63,7 @@ class Dataset:
 
         return list(new_datasets.values())
 
-    def train_test_split(self, train_ratio: float = 0.6) -> tuple['Dataset', 'Dataset']:
+    def train_test_split(self, train_ratio: float = 0.6) -> tuple[Self, Self]:
         if train_ratio < 0 or train_ratio > 1:
             raise ValueError("train_ratio must be between 0 and 1")
 
@@ -84,7 +85,7 @@ class Dataset:
         return train_dataset, test_dataset
 
     @classmethod
-    def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> 'Dataset':
+    def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:
             lines = file.readlines()
             attributes = []
