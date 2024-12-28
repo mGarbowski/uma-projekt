@@ -1,13 +1,15 @@
 from pprint import pprint
+from typing import Type
 
+from src.classifiers.classifier import Classifier
 from src.classifiers.id3 import ID3Classifier
-from src.dataset.dataset import Dataset
-from src.evaluation.confusion_matrix import ConfusionMatrix
 from src.classifiers.one_vs_one import OneVsOneClassifier
 from src.classifiers.one_vs_rest import OneVsRestClassifier
+from src.dataset.dataset import Dataset
+from src.evaluation.confusion_matrix import ConfusionMatrix
 
 
-def test_model_on_dataset(model_class, dataset: Dataset):
+def test_model_on_dataset(model_class: Type[Classifier], dataset: Dataset):
     model = model_class.train(dataset)
     predictions = model.predict(dataset.attributes)
     actual_labels = dataset.labels
