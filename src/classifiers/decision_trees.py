@@ -33,7 +33,7 @@ def best_split_idx(dataset: Dataset, unused_attribute_idxs: set[int]) -> int:
     )
 
 
-def most_common_element(elements: list[T]) -> T:
+def most_common_element(elements: list[T]) -> tuple[T, float]:
     counts = {}
     for element in elements:
         if element not in counts:
@@ -42,7 +42,8 @@ def most_common_element(elements: list[T]) -> T:
             counts[element] += 1
 
     elem, count = max(counts.items(), key=lambda item: item[1])
-    return elem
+    weight = count / len(elements)
+    return elem, weight
 
 
 @dataclass
@@ -70,6 +71,7 @@ class Evaluation:
 class Node:
     children: dict[str, 'Node']
     leaf_label: str | None
+    weight: float
     most_common_label: str  # fallback for intermediate nodes with no corresponding children
     split_attribute_idx: int | None
 
@@ -77,10 +79,11 @@ class Node:
         return self.leaf_label is not None
 
     @classmethod
-    def leaf(cls, label: str) -> 'Node':
+    def leaf(cls, label: str, weight: float) -> 'Node':
         return cls(
             children={},
             leaf_label=label,
+            weight=weight,
             most_common_label=label,
             split_attribute_idx=None,
         )
@@ -98,19 +101,19 @@ class DecisionTreeClassifier:
         root = build_decision_tree(dataset, attribute_idxs)
         return cls(root)
 
-    def predict_single(self, row_attributes: RowAttributes) -> Label:
+    def predict_single(self, row_attributes: RowAttributes) -> tuple[Label, float]:
         """Predict label based on attributes"""
         node = self._root
         while not node.is_leaf():
             attribute_value = row_attributes[node.split_attribute_idx]
             if attribute_value not in node.children:
-                return node.most_common_label
+                return node.most_common_label, node.weight
 
             node = node.children[attribute_value]
 
-        return node.leaf_label
+        return node.leaf_label, node.weight
 
-    def predict(self, attributes: list[RowAttributes]) -> list[Label]:
+    def predict(self, attributes: list[RowAttributes]) -> list[tuple[Label, float]]:
         """Predict label based on attributes for each row"""
         return [self.predict_single(row_attributes) for row_attributes in attributes]
 
@@ -143,13 +146,13 @@ def build_decision_tree(
 
     _, final_label = training_set[0]
     if all(label == final_label for label in training_set.labels):
-        return Node.leaf(final_label)
+        return Node.leaf(final_label, 1.0)
 
     if len(unused_attribute_idxs) == 0:
-        most_common_label = most_common_element(training_set.labels)
-        return Node.leaf(most_common_label)
+        most_common_label, weight = most_common_element(training_set.labels)
+        return Node.leaf(most_common_label, weight)
 
-    most_common_label = most_common_element(training_set.labels)
+    most_common_label, weight = most_common_element(training_set.labels)
     split_attribute_idx = best_split_idx(training_set, unused_attribute_idxs)
     dataset_partition = training_set.split_by_attribute(split_attribute_idx)
     unused_attribute_idxs.remove(split_attribute_idx)
@@ -164,6 +167,7 @@ def build_decision_tree(
     return Node(
         children=children,
         leaf_label=None,
+        weight=weight,
         most_common_label=most_common_label,
         split_attribute_idx=split_attribute_idx
     )

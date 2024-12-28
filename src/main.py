@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from classifiers.dataset import Dataset
 from classifiers.decision_trees import DecisionTreeClassifier
 
@@ -60,7 +62,8 @@ def main():
     balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data")
 
     model = DecisionTreeClassifier.train(car_evaluation)
-    pass
+    predictions = model.predict(car_evaluation.attributes)
+    pprint(predictions)
 
 
 if __name__ == '__main__':
