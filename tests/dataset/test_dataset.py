@@ -27,3 +27,14 @@ def test_split_dataset():
     assert expected_1 in after_split
     assert expected_5 in after_split
     assert expected_6 in after_split
+
+def test_binarize_labels():
+    dataset = Dataset(
+        [("1", "2"), ("5", "1"), ("6", "3"), ("1", "2")],
+        ["A", "C", "B", "B"]
+    )
+    expected = Dataset(
+        [("1", "2"), ("5", "1"), ("6", "3"), ("1", "2")],
+        ["A", "other", "other", "other"]
+    )
+    assert dataset.binarize_labels("A") == expected
