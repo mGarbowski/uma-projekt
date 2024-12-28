@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Self
 
 from .classifier import Classifier
-from .dataset import Dataset, RowAttributes, Label
+from src.dataset.dataset import Dataset, RowAttributes, Label
 
 
 def entropy(dataset: Dataset) -> float:

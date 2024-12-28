@@ -1,7 +1,7 @@
 from pprint import pprint
 
-from classifiers.dataset import Dataset
 from classifiers.id3 import ID3Classifier
+from dataset.dataset import Dataset
 from evaluation.confusion_matrix import ConfusionMatrix
 
 
