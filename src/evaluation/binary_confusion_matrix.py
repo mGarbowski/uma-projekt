@@ -29,3 +29,17 @@ class BinaryConfusionMatrix:
         tn = sum(matrix.matrix[negative][negative] for negative in negative_labels)
 
         return cls(tp, tn, fp, fn)
+
+    def recall(self) -> float:
+        return self.true_positives / (self.true_positives + self.false_negatives)
+
+    def precision(self) -> float:
+        return self.true_positives / (self.true_positives + self.false_positives)
+
+    def f_measure(self) -> float:
+        precision = self.precision()
+        recall = self.recall()
+        return 2 * precision * recall / (precision + recall)
+
+    def specificity(self) -> float:
+        return self.true_negatives / (self.true_negatives + self.false_positives)
