@@ -59,3 +59,19 @@ def test_subset_with_labels():
         ["C", "B", "B"]
     )
     assert dataset.subset_with_labels({"C", "B"}) == expected
+
+def test_shuffle():
+    dataset = Dataset(
+        [("1", "2"), ("3", "4"), ("5", "6"), ("7", "8")],
+        ["A", "B", "C", "D"]
+    )
+    dataset.shuffle()
+    assert dataset.size() == 4
+    assert dataset.attributes != [("1", "2"), ("3", "4"), ("5", "6"), ("7", "8")]
+    assert dataset.labels != ["A", "B", "C", "D"]
+    assert set(dataset.attributes) == {("1", "2"), ("3", "4"), ("5", "6"), ("7", "8")}
+    assert set(dataset.labels) == {"A", "B", "C", "D"}
+    assert dataset.attributes.index(("1", "2")) == dataset.labels.index("A")
+    assert dataset.attributes.index(("3", "4")) == dataset.labels.index("B")
+    assert dataset.attributes.index(("5", "6")) == dataset.labels.index("C")
+    assert dataset.attributes.index(("7", "8")) == dataset.labels.index("D")

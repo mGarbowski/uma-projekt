@@ -102,6 +102,12 @@ class Dataset:
 
         return Dataset(new_attributes, new_labels)
 
+    def shuffle(self):
+        """Randomly rearrange elements of the dataset in place"""
+        zipped = list(zip(self._attributes, self._labels))
+        random.shuffle(zipped)
+        self._attributes, self._labels = zip(*zipped)
+
     @classmethod
     def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:
