@@ -67,7 +67,10 @@ class Node:
         )
 
 
-WeightedPrediction = tuple[Label, float]
+@dataclass(frozen=True)
+class WeightedPrediction:
+    label: str
+    weight: float
 
 class ID3Classifier(Classifier):
     _root: Node
@@ -87,11 +90,11 @@ class ID3Classifier(Classifier):
         while not node.is_leaf():
             attribute_value = row_attributes[node.split_attribute_idx]
             if attribute_value not in node.children:
-                return node.most_common_label, node.weight
+                return WeightedPrediction(node.most_common_label, node.weight)
 
             node = node.children[attribute_value]
 
-        return node.leaf_label, node.weight
+        return WeightedPrediction(node.leaf_label, node.weight)
 
     def predict_single(self, row_attributes: RowAttributes) -> Label:
         label, _ = self.predict_single_with_weight(row_attributes)

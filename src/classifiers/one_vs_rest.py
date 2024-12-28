@@ -28,10 +28,17 @@ class OneVsRestClassifier(Classifier):
         return cls(trees)
 
     def predict_single(self, row_attributes: RowAttributes) -> Label:
-        predictions = {label: tree.predict_single_with_weight(row_attributes) for label, tree in self._trees.items()}
-        positive_predictions = {label: pred for label, pred in predictions.items() if pred[0] == label}
+        predictions = {
+            label: tree.predict_single_with_weight(row_attributes)
+            for label, tree in self._trees.items()
+        }
+        positive_predictions = {
+            label: pred
+            for label, pred in predictions.items()
+            if pred.label == label
+        }
 
         if len(positive_predictions) == 0:
-            return min(predictions, key=lambda label: predictions[label][1])[0]
+            return min(predictions, key=lambda label: predictions[label].weight)
 
-        return max(positive_predictions, key=lambda label: positive_predictions[label][1])[0]
+        return max(positive_predictions, key=lambda label: positive_predictions[label].weight)
