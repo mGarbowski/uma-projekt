@@ -1,8 +1,8 @@
 from typing import Self
 
-from .classifier import Classifier
-from .id3 import ID3Classifier
-from ..dataset.dataset import RowAttributes, Label, Dataset
+from src.classifiers.classifier import Classifier
+from src.classifiers.id3 import ID3Classifier
+from src.dataset.dataset import RowAttributes, Label, Dataset
 
 
 class OneVsRestClassifier(Classifier):

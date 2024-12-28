@@ -2,8 +2,8 @@ import math
 from dataclasses import dataclass
 from typing import Self
 
-from .classifier import Classifier
-from ..dataset.dataset import Dataset, RowAttributes, Label
+from src.dataset.dataset import Dataset, RowAttributes, Label
+from src.classifiers.classifier import Classifier
 
 
 def entropy(dataset: Dataset) -> float:
@@ -98,8 +98,7 @@ class ID3Classifier(Classifier):
         return WeightedPrediction(node.leaf_label, node.weight)
 
     def predict_single(self, row_attributes: RowAttributes) -> Label:
-        label, _ = self.predict_single_with_weight(row_attributes)
-        return label
+        return self.predict_single_with_weight(row_attributes).label
 
     def predict_with_weights(self, attributes: list[RowAttributes]) -> list[WeightedPrediction]:
         """Predict label based on attributes for each row, include weight of the prediction"""
