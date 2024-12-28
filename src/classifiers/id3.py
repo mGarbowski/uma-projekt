@@ -67,6 +67,8 @@ class Node:
         )
 
 
+WeightedPrediction = tuple[Label, float]
+
 class ID3Classifier(Classifier):
     _root: Node
 
@@ -79,7 +81,7 @@ class ID3Classifier(Classifier):
         root = build_decision_tree(dataset, attribute_idxs)
         return cls(root)
 
-    def predict_single_with_weight(self, row_attributes: RowAttributes) -> tuple[Label, float]:
+    def predict_single_with_weight(self, row_attributes: RowAttributes) -> WeightedPrediction:
         """Predict label based on attributes, include weight of the prediction"""
         node = self._root
         while not node.is_leaf():
@@ -95,7 +97,7 @@ class ID3Classifier(Classifier):
         label, _ = self.predict_single_with_weight(row_attributes)
         return label
 
-    def predict_with_weights(self, attributes: list[RowAttributes]) -> list[tuple[Label, float]]:
+    def predict_with_weights(self, attributes: list[RowAttributes]) -> list[WeightedPrediction]:
         """Predict label based on attributes for each row, include weight of the prediction"""
         return [self.predict_single_with_weight(row_attributes) for row_attributes in attributes]
 
