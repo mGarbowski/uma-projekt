@@ -2,7 +2,7 @@ import math
 from dataclasses import dataclass
 from typing import TypeVar
 
-from dataset import Dataset, RowAttributes, Label
+from .dataset import Dataset, RowAttributes, Label
 
 T = TypeVar('T')
 

@@ -1,5 +1,5 @@
-from dataset import Dataset
-from decision_trees import DecisionTreeClassifier
+from classifiers.dataset import Dataset
+from classifiers.decision_trees import DecisionTreeClassifier
 
 
 def avg(values: list) -> float:
@@ -55,8 +55,8 @@ def remove_missing_values(dataset: Dataset, empty_symbol: str) -> Dataset:
 
 
 def main():
-    mushroom = Dataset.load_from_file("../datasets/mushroom/agaricus-lepiota.data")
-    breast_cancer = Dataset.load_from_file("../datasets/breast+cancer/breast-cancer.data")
+    mushroom = Dataset.load_from_file("datasets/mushroom/agaricus-lepiota.data")
+    breast_cancer = Dataset.load_from_file("datasets/breast+cancer/breast-cancer.data")
     breast_cancer_no_missing_values = remove_missing_values(breast_cancer, "?")
 
     # evaluate_on_dataset(

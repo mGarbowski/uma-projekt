@@ -1,4 +1,4 @@
-from decision_trees import Dataset, entropy, most_common_element
+from src.classifiers.decision_trees import Dataset, entropy, most_common_element
 
 
 def test_zero_entropy():

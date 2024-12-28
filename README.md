@@ -19,3 +19,30 @@ Przed rozpoczęciem realizacji projektu proszę zapoznać się z zawartością: 
 ## Linki
 * [wytyczne prowadzącego](https://staff.elka.pw.edu.pl/~rbiedrzy/UMA/index.html)
 * [zasady realizacji projektu](http://elektron.elka.pw.edu.pl/~pcichosz/uma/uma-projekt-zasady.html)
+
+## Uruchomienie i instalacja
+
+### Utworzenie środowiska wirtualnego
+```bash
+python3 -m venv .venv
+```
+
+### Aktywacja środowiska wirtualnego
+```bash
+source .venv/bin/activate
+```
+
+### Instalacja zależności
+```bash
+pip install -r requirements.txt
+```
+
+### Uruchomienie
+```bash
+python src/main.py
+```
+
+### Uruchomienie testów
+```bash
+python -m pytest
+```
