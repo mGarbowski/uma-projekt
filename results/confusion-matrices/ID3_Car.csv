@@ -1,5 +1,5 @@
-,acc,unacc,good,vgood
-acc,129,17,1,3
-unacc,11,468,3,0
-good,5,0,20,11
-vgood,1,0,0,23
+,acc,good,vgood,unacc
+acc,125,8,4,10
+good,4,12,9,3
+vgood,3,4,21,0
+unacc,18,1,2,468
