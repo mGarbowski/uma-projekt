@@ -1,3 +1,8 @@
+"""Dataset representing tabular data with attributes and labels
+Based on earlier assignment from course Wstęp do Sztucznej Inteligencji
+by Mikołaj Garbowski
+"""
+
 import random
 from typing import Self, Iterable
 

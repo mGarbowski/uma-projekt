@@ -1,3 +1,9 @@
+"""ID3 decision tree classifier implementation
+
+Based on earlier assignment from course Wstęp do Sztucznej Inteligencji
+by Mikołaj Garbowski
+"""
+
 import math
 from dataclasses import dataclass
 from typing import Self
