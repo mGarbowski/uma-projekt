@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{csvsimple} % Csv tables
+\usepackage[polish]{babel}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{subcaption}
+
+\title{UMA - Projekt}
+\author{Mikołaj Garbowski, Michał Pałasz}
+\date{Semestr 2024Z}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\section{Macierze pomyłek}
+Przykładowe macierze pomyłek dla wszystkich zbiorów danych i klasyfikatorów.
+Prezentowane macierze pomyłek są otrzymane z jednokrotnego wykonania predykcji przy podejściu z oddzielnym zbiorem uczącym i testowym (podzielone w proporcji $0.6$).
+
+\begin{figure}[ht]
+    \centering
+    \begin{tabular}{ccc}
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/ID3Classifier_balance-scale.data.csv}
+            \caption{ID3: Balance Scale}
+        \end{subfigure} &
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/ID3Classifier_car.data.csv}
+            \caption{ID3: Car}
+        \end{subfigure} &
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/ID3Classifier_NPHA-doctor-visits.csv.csv}
+            \caption{ID3: NPHA}
+        \end{subfigure} \\
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/OneVsOneClassifier_balance-scale.data.csv}
+            \caption{One vs One: Balance Scale}
+        \end{subfigure} &
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/OneVsOneClassifier_car.data.csv}
+            \caption{One vs One: Car}
+        \end{subfigure} &
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/OneVsOneClassifier_NPHA-doctor-visits.csv.csv}
+            \caption{One vs One: NPHA}
+        \end{subfigure} \\
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/OneVsRestClassifier_balance-scale.data.csv}
+            \caption{One vs Rest: Balance Scale}
+        \end{subfigure} &
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/OneVsRestClassifier_car.data.csv}
+            \caption{One vs Rest: Car}
+        \end{subfigure} &
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \csvautotabular{results/confusion-matrices/OneVsRestClassifier_NPHA-doctor-visits.csv.csv}
+            \caption{One vs Rest: NPHA}
+        \end{subfigure}
+    \end{tabular}
+    \caption{Macierze pomyłek}
+    \label{fig:confusion-matrices-grid}
+\end{figure}
+
+\end{document}
