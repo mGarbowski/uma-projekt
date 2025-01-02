@@ -19,3 +19,8 @@ class Classifier(ABC):
     def predict(self, attributes: list[RowAttributes]) -> list[Label]:
         """Predict label based on attributes for each row"""
         return [self.predict_single(row_attributes) for row_attributes in attributes]
+
+    @classmethod
+    @abstractmethod
+    def name(cls) -> str:
+        pass

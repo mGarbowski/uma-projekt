@@ -50,3 +50,7 @@ class OneVsOneClassifier(Classifier):
             votes[other_label] += (1 - prediction.weight)
 
         return max(votes, key=lambda label: votes[label])
+
+    @classmethod
+    def name(cls) -> str:
+        return "One vs One"

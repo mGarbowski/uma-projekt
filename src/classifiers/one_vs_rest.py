@@ -42,3 +42,7 @@ class OneVsRestClassifier(Classifier):
             return min(predictions, key=lambda label: predictions[label].weight)
 
         return max(positive_predictions, key=lambda label: positive_predictions[label].weight)
+
+    @classmethod
+    def name(cls) -> str:
+        return "One vs Rest"

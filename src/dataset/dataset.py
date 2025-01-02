@@ -156,7 +156,7 @@ class Dataset:
         return train_set, test_set
 
     @classmethod
-    def load_from_file(cls, file_path: str, label_col_idx: int = 0, skip_header: bool = False) -> Self:
+    def load_from_file(cls, file_path: str, label_col_idx: int = 0, skip_header: bool = False, name: str = None) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:
             lines = file.readlines()
             if skip_header:
@@ -171,5 +171,4 @@ class Dataset:
                 attributes.append(attrs)
                 labels.append(label)
 
-            name = file_path.split("/")[-1]
             return cls(attributes, labels, name)

@@ -110,6 +110,10 @@ class ID3Classifier(Classifier):
         """Predict label based on attributes for each row, include weight of the prediction"""
         return [self.predict_single_with_weight(row_attributes) for row_attributes in attributes]
 
+    @classmethod
+    def name(cls) -> str:
+        return "ID3"
+
 
 def build_decision_tree(
         training_set: Dataset,

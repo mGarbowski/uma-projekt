@@ -35,14 +35,14 @@ def experiment_train_test_split():
 def generate_csv_report(filename, models, datasets):
     with open(filename, "w") as f:
         f.write(
-            "model,dataset,averaging_mode,accuracy_mean,accuracy_std,recall_mean,recall_std,precision_mean,precision_std,f_measure_mean,f_measure_std,specificity_mean,specificity_std,tp_rate_mean,tp_rate_std,fp_rate_mean,fp_rate_std\n")
+            "Model,Zbiór danych,Uśrednianie,Dokładność (avg),Dokładność (std),Odzysk (avg),Odzysk (std),Precyzja (avg),Precyzja (std),Miara F (avg),Miara F (std),Specyficzność (avg),Specyficzność (std),TP rate (avg),TP rate (std),FP rate (avg),FP rate (std)\n")
         for dataset in datasets:
             for model in models:
                 micro, macro = kcv(model, dataset, 5)
                 f.write(
-                    f"{model.__name__},{dataset.name},micro,{micro.accuracy_mean:.3f},{micro.accuracy_std:.3f},{micro.recall_mean:.3f},{micro.recall_std:.3f},{micro.precision_mean:.3f},{micro.precision_std:.3f},{micro.f_measure_mean:.3f},{micro.f_measure_std:.3f},{micro.specificity_mean:.3f},{micro.specificity_std:.3f},{micro.tp_rate_mean:.3f},{micro.tp_rate_std:.3f},{micro.fp_rate_mean:.3f},{micro.fp_rate_std:.3f}\n")
+                    f"{model.name()},{dataset.name},micro,{micro.accuracy_mean:.3f},{micro.accuracy_std:.3f},{micro.recall_mean:.3f},{micro.recall_std:.3f},{micro.precision_mean:.3f},{micro.precision_std:.3f},{micro.f_measure_mean:.3f},{micro.f_measure_std:.3f},{micro.specificity_mean:.3f},{micro.specificity_std:.3f},{micro.tp_rate_mean:.3f},{micro.tp_rate_std:.3f},{micro.fp_rate_mean:.3f},{micro.fp_rate_std:.3f}\n")
                 f.write(
-                    f"{model.__name__},{dataset.name},macro,{macro.accuracy_mean:.3f},{macro.accuracy_std:.3f},{macro.recall_mean:.3f},{macro.recall_std:.3f},{macro.precision_mean:.3f},{macro.precision_std:.3f},{macro.f_measure_mean:.3f},{macro.f_measure_std:.3f},{macro.specificity_mean:.3f},{macro.specificity_std:.3f},{macro.tp_rate_mean:.3f},{macro.tp_rate_std:.3f},{macro.fp_rate_mean:.3f},{macro.fp_rate_std:.3f}\n")
+                    f"{model.name()},{dataset.name},macro,{macro.accuracy_mean:.3f},{macro.accuracy_std:.3f},{macro.recall_mean:.3f},{macro.recall_std:.3f},{macro.precision_mean:.3f},{macro.precision_std:.3f},{macro.f_measure_mean:.3f},{macro.f_measure_std:.3f},{macro.specificity_mean:.3f},{macro.specificity_std:.3f},{macro.tp_rate_mean:.3f},{macro.tp_rate_std:.3f},{macro.fp_rate_mean:.3f},{macro.fp_rate_std:.3f}\n")
 
 def example_confusion_matrices(directory, models, datasets):
     for dataset in datasets:
@@ -52,7 +52,7 @@ def example_confusion_matrices(directory, models, datasets):
             predictions = model.predict(test_set.attributes)
             confusion_matrix = ConfusionMatrix.from_labels(test_set.labels, predictions)
 
-            filename = f"{directory}/{model_class.__name__}_{dataset.name}.csv"
+            filename = f"{directory}/{model_class.name()}_{dataset.name}.csv"
             save_confusion_matrix_to_csv(confusion_matrix, filename)
 
 
@@ -71,9 +71,9 @@ def save_confusion_matrix_to_csv(confusion_matrix, filename):
 
 def main():
     datasets = [
-        Dataset.load_from_file("datasets/car+evaluation/car.data", label_col_idx=6),
-        Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0),
-        Dataset.load_from_file("datasets/national+poll+on+healthy+aging+(npha)/NPHA-doctor-visits.csv", label_col_idx=0, skip_header=True),
+        Dataset.load_from_file("datasets/car+evaluation/car.data", label_col_idx=6, name="Car"),
+        Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0, name="Balance scale"),
+        Dataset.load_from_file("datasets/national+poll+on+healthy+aging+(npha)/NPHA-doctor-visits.csv", label_col_idx=0, name="NPHA", skip_header=True),
     ]
 
     models = [

@@ -17,3 +17,7 @@ class RandomClassifier(Classifier):
 
     def predict_single(self, row_attributes: RowAttributes) -> Label:
         return random.choice(self.unique_labels)
+
+    @classmethod
+    def name(cls) -> str:
+        return "Random"
