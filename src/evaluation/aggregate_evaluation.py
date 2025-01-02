@@ -7,6 +7,8 @@ from src.evaluation.evaluation import Evaluation
 
 @dataclass
 class AggregateEvaluation:
+    accuracy_mean: float
+    accuracy_std: float
     recall_mean: float
     recall_std: float
     precision_mean: float
@@ -23,6 +25,8 @@ class AggregateEvaluation:
     @classmethod
     def from_evaluations(cls, evaluations: list[Evaluation]) -> Self:
         return cls(
+            accuracy_mean=mean(e.accuracy for e in evaluations),
+            accuracy_std=stdev(e.accuracy for e in evaluations),
             recall_mean=mean(e.recall for e in evaluations),
             recall_std=stdev(e.recall for e in evaluations),
             precision_mean=mean(e.precision for e in evaluations),

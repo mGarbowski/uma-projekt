@@ -34,15 +34,14 @@ def experiment_train_test_split():
 def generate_csv_report(filename, models, datasets):
     with open(filename, "w") as f:
         f.write(
-            "model,dataset,averaging_mode,recall_mean,recall_std,precision_mean,precision_std,f_measure_mean,f_measure_std,specificity_mean,specificity_std,tp_rate_mean,tp_rate_std,fp_rate_mean,fp_rate_std\n")
+            "model,dataset,averaging_mode,accuracy_mean,accuracy_std,recall_mean,recall_std,precision_mean,precision_std,f_measure_mean,f_measure_std,specificity_mean,specificity_std,tp_rate_mean,tp_rate_std,fp_rate_mean,fp_rate_std\n")
         for dataset in datasets:
             for model in models:
                 micro, macro = kcv(model, dataset, 5)
                 f.write(
-                    f"{model.__name__},{dataset.name},micro,{micro.recall_mean},{micro.recall_std},{micro.precision_mean},{micro.precision_std},{micro.f_measure_mean},{micro.f_measure_std},{micro.specificity_mean},{micro.specificity_std},{micro.tp_rate_mean},{micro.tp_rate_std},{micro.fp_rate_mean},{micro.fp_rate_std}\n")
+                    f"{model.__name__},{dataset.name},micro,{micro.accuracy_mean:.3f},{micro.accuracy_std:.3f},{micro.recall_mean:.3f},{micro.recall_std:.3f},{micro.precision_mean:.3f},{micro.precision_std:.3f},{micro.f_measure_mean:.3f},{micro.f_measure_std:.3f},{micro.specificity_mean:.3f},{micro.specificity_std:.3f},{micro.tp_rate_mean:.3f},{micro.tp_rate_std:.3f},{micro.fp_rate_mean:.3f},{micro.fp_rate_std:.3f}\n")
                 f.write(
-                    f"{model.__name__},{dataset.name},macro,{macro.recall_mean},{macro.recall_std},{macro.precision_mean},{macro.precision_std},{macro.f_measure_mean},{macro.f_measure_std},{macro.specificity_mean},{macro.specificity_std},{macro.tp_rate_mean},{macro.tp_rate_std},{macro.fp_rate_mean},{macro.fp_rate_std}\n")
-
+                    f"{model.__name__},{dataset.name},macro,{macro.accuracy_mean:.3f},{macro.accuracy_std:.3f},{macro.recall_mean:.3f},{macro.recall_std:.3f},{macro.precision_mean:.3f},{macro.precision_std:.3f},{macro.f_measure_mean:.3f},{macro.f_measure_std:.3f},{macro.specificity_mean:.3f},{macro.specificity_std:.3f},{macro.tp_rate_mean:.3f},{macro.tp_rate_std:.3f},{macro.fp_rate_mean:.3f},{macro.fp_rate_std:.3f}\n")
 
 def main():
     datasets = [

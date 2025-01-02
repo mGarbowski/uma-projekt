@@ -39,6 +39,13 @@ class BinaryConfusionMatrix:
 
         return cls(tp, tn, fp, fn)
 
+    def accuracy(self) -> float:
+        try:
+            return (self.true_positives + self.true_negatives) / (self.true_positives + self.true_negatives +
+                                                                  self.false_positives + self.false_negatives)
+        except ZeroDivisionError:
+            return 0.0
+
     def recall(self) -> float:
         try:
             return self.true_positives / (self.true_positives + self.false_negatives)

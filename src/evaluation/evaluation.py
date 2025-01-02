@@ -8,6 +8,7 @@ from src.evaluation.confusion_matrix import ConfusionMatrix
 
 @dataclass
 class Evaluation:
+    accuracy: float
     recall: float
     precision: float
     f_measure: float
@@ -18,6 +19,7 @@ class Evaluation:
     @classmethod
     def from_binary_confusion_matrix(cls, binary_confusion_matrix: BinaryConfusionMatrix) -> Self:
         return cls(
+            binary_confusion_matrix.accuracy(),
             binary_confusion_matrix.recall(),
             binary_confusion_matrix.precision(),
             binary_confusion_matrix.f_measure(),
@@ -44,6 +46,7 @@ class Evaluation:
         ]
 
         return cls(
+            accuracy=mean(e.accuracy for e in evaluations),
             recall=mean(e.recall for e in evaluations),
             precision=mean(e.precision for e in evaluations),
             f_measure=mean(e.f_measure for e in evaluations),
