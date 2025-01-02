@@ -53,4 +53,4 @@ class OneVsOneClassifier(Classifier):
 
     @classmethod
     def name(cls) -> str:
-        return "One vs One"
+        return "One-vs-One"

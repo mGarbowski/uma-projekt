@@ -72,7 +72,7 @@ def save_confusion_matrix_to_csv(confusion_matrix, filename):
 def main():
     datasets = [
         Dataset.load_from_file("datasets/car+evaluation/car.data", label_col_idx=6, name="Car"),
-        Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0, name="Balance scale"),
+        Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0, name="Balance-scale"),
         Dataset.load_from_file("datasets/national+poll+on+healthy+aging+(npha)/NPHA-doctor-visits.csv", label_col_idx=0, name="NPHA", skip_header=True),
     ]
 

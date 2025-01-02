@@ -45,4 +45,4 @@ class OneVsRestClassifier(Classifier):
 
     @classmethod
     def name(cls) -> str:
-        return "One vs Rest"
+        return "One-vs-Rest"
