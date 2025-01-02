@@ -1,5 +1,5 @@
 <!--
-pandoc -o docs/MikolajGarbowski_MichalPalasz.pdf docs/dokumentacja-wstepna.md -V geometry:margin=1in
+pandoc -o docs/dokumentacja-wstepna.pdf docs/dokumentacja-wstepna.md -V geometry:margin=1in
 -->
 
 # Projekt UMA - dokumentacja wstępna
