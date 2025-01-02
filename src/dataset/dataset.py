@@ -156,9 +156,12 @@ class Dataset:
         return train_set, test_set
 
     @classmethod
-    def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
+    def load_from_file(cls, file_path: str, label_col_idx: int = 0, skip_header: bool = False) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:
             lines = file.readlines()
+            if skip_header:
+                lines = lines[1:]
+
             attributes = []
             labels = []
             for line in lines:
