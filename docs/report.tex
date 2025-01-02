@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{csvsimple} % Csv tables
+\usepackage{adjustbox}
 \usepackage[polish]{babel}
 \usepackage[margin=0.5in]{geometry}
 
@@ -72,6 +73,44 @@ Prezentowane macierze pomyłek są otrzymane z jednokrotnego wykonania predykcji
     \caption{Macierze pomyłek}
     \label{fig:confusion-matrices-grid}
 \end{figure}
+
+\newpage
+\section{Metryki}
+
+\subsection{Makro-uśrednianie}
+\begin{table}[h!]
+    \centering
+    \begin{adjustbox}{valign=c, width=\textwidth}
+        \csvautotabular{results/metrics/macro-1.csv}
+    \end{adjustbox}
+    \label{tab:metrics-macro-1}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{adjustbox}{valign=c, width=\textwidth}
+        \csvautotabular{results/metrics/macro-2.csv}
+    \end{adjustbox}
+    \label{tab:metrics-macro-2}
+\end{table}
+
+\subsection{Mikro-uśrednianie}
+
+\begin{table}[h!]
+    \centering
+    \begin{adjustbox}{valign=c, width=\textwidth}
+        \csvautotabular{results/metrics/micro-1.csv}
+    \end{adjustbox}
+    \label{tab:metrics-micro-1}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{adjustbox}{valign=c, width=\textwidth}
+        \csvautotabular{results/metrics/micro-2.csv}
+    \end{adjustbox}
+    \label{tab:metrics-micro-2}
+\end{table}
 
 \end{document}
 ```
