@@ -168,7 +168,9 @@ Celem zbioru jest przewidywanie liczby odwiedzanych lekarzy przez Amerykanów po
 
 Żaden z powyższych zestawów danych nie posiada brakujących danych.
 
-\section{Macierze pomyłek}
+\section{Wyniki}
+
+\subsection*{Macierze pomyłek}
 Przykładowe macierze pomyłek dla wszystkich zbiorów danych i klasyfikatorów.
 Prezentowane macierze pomyłek są otrzymane z jednokrotnego wykonania predykcji przy podejściu z oddzielnym zbiorem uczącym i testowym (podzielone w proporcji $0.6$).
 
@@ -226,7 +228,7 @@ Prezentowane macierze pomyłek są otrzymane z jednokrotnego wykonania predykcji
 \end{figure}
 
 \newpage
-\section{Metryki}
+\subsection*{Metryki}
 Do porównania jakości klasyfikacji modeli wykorzystujemy metryki:
 dokładność, odzysk, precyzja, miara F, specyficzność, TP rate, FP rate.
 
@@ -237,7 +239,7 @@ Dla każdej metryki podajemy wartość średnią i odchylenie standardowe wylicz
 k-krotnej walidacji krzyżowej z $k=5$.
 
 
-\subsection{Makro-uśrednianie}
+\subsubsection*{Makro-uśrednianie}
 \begin{table}[h!]
     \centering
     \begin{adjustbox}{valign=c, width=\textwidth}
@@ -254,7 +256,7 @@ k-krotnej walidacji krzyżowej z $k=5$.
     \label{tab:metrics-macro-2}
 \end{table}
 
-\subsection{Mikro-uśrednianie}
+\subsubsection*{Mikro-uśrednianie}
 
 \begin{table}[h!]
     \centering
@@ -271,6 +273,29 @@ k-krotnej walidacji krzyżowej z $k=5$.
     \end{adjustbox}
     \label{tab:metrics-micro-2}
 \end{table}
+
+\newpage
+\subsection{Wnioski}
+Zastosowanie różnych wariantów klasyfikatora daje różnice rzędu kilku punktów procentowych dla przyjętych metryk.
+
+Na zbiorze danych \textbf{Car} wyraźne najlepiej sprawdza się podejście One vs One. Miara F przy makro-uśrednianiu jest większa aż o ok. $0.09$ względem pozostałych wariantów. Bardziej widoczna jest przewaga podejścia OvO przy makro-uśrednianiu, gdzie jakość predykcji każdej z klas traktujemy jako jednakowo ważne. Przy mikro-uśrednianiu, gdzie predykcje klas są traktowane jako ważne proporcjonalnie do ich częstości, przewaga OvO pozostałymi wariantami jest mniejsza.
+Standardowy model i OvR osiągnęły zbliżone wyniki.
+Przykłady klasy \textbf{unacc} dominują w zbiorze ($70\%$ wszystkich przykładów).
+
+Na zbiorze danych \textbf{Balance scale} najlepsze rezultaty osiąga wariant One vs Rest, a najgorsze One vs One. W tym zbiorze danych przykłady klasy \textbf{B} są znacznie rzadsze niż pozostałych klas, więc odzysk, precyzja i miara F są zdecydowanie niższe przy makro-uśrednianiu.
+Wartości wszystkich metryk zachowują podobne relacje i (OvR > ID3 > OvO) i różnice rzędu $0.03$.
+
+Na zbiorze danych \textbf{NPHA} rezultaty pod kątem miary F są zbliżone dla ID3 i OvR przy makro-uśrednianiu.
+Przy mikro-uśrednianiu OvR daje o ok. $0.02$ lepsze rezultaty według wszystkich miar, a ID3 i OvO bardzo zbliżone.
+
+Dla badanych zbiorów danych jeden z modeli zespołowych opartych na ID3 sprawdzał się lepiej niż standardowy klasyfikator.
+
+Wszystkie z stosowanych miar jakości zachowują podobne relacje i proporcje różnic pomiędzy różnymi modelami, dla tego samego zbioru danych.
+
+Wariant OvO, gdzie pojedyncze drzewa uczone są na mniejszych (znacznie mniejszych dla mniej licznych klas) podzbiorach zbioru uczącego, uzyskał wyraźną przewagę na zbiorze \textbf{Car}, który był bardziej liczny niż pozostałe, a w rozkładzie klas jedna wyraźnie dominuje i 2 są stosunkowo rzadkie (poniżej $4\%$).
+
+Wariant OvR sprawdził się lepiej na zbiorach danych \textbf{Balance scale} i \textbf{NPHA} o podobnej liczności, ale różnej liczbie atrybutów.
+Dla tych zbiorów gdzie wariant OvR osiąga najwyższe miary jakości, wariant OvO osiąga gorsze lub porównywalne wyniki do standardowego klasyfikatora.
 
 \section{Odstępstwa od dokumentacji wstępnej}
 
