@@ -3,6 +3,7 @@
 \usepackage{csvsimple} % Csv tables
 \usepackage{adjustbox}
 \usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
 \usepackage[margin=0.5in]{geometry}
 
 \usepackage{subcaption}
@@ -76,6 +77,15 @@ Prezentowane macierze pomyłek są otrzymane z jednokrotnego wykonania predykcji
 
 \newpage
 \section{Metryki}
+Do porównania jakości klasyfikacji modeli wykorzystujemy metryki:
+dokładność, odzysk, precyzja, miara F, specyficzność, TP rate, FP rate.
+
+Dla zastosowania standardowych metryk klasyfikacji binarnej do problemu klasyfikacji wieloklasowej stosujemy
+podejście makro-uśredniania i mikro-uśredniania. Wyniki dla obu wariantów przedstawiono w tabelach.
+
+Dla każdej metryki podajemy wartość średnią i odchylenie standardowe wyliczone przy
+k-krotnej walidacji krzyżowej z $k=5$.
+
 
 \subsection{Makro-uśrednianie}
 \begin{table}[h!]
@@ -113,4 +123,3 @@ Prezentowane macierze pomyłek są otrzymane z jednokrotnego wykonania predykcji
 \end{table}
 
 \end{document}
-```
