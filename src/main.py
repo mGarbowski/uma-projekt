@@ -1,5 +1,6 @@
 from pprint import pprint
 from typing import Type
+import csv
 
 from src.classifiers.classifier import Classifier
 from src.classifiers.id3 import ID3Classifier
@@ -43,11 +44,36 @@ def generate_csv_report(filename, models, datasets):
                 f.write(
                     f"{model.__name__},{dataset.name},macro,{macro.accuracy_mean:.3f},{macro.accuracy_std:.3f},{macro.recall_mean:.3f},{macro.recall_std:.3f},{macro.precision_mean:.3f},{macro.precision_std:.3f},{macro.f_measure_mean:.3f},{macro.f_measure_std:.3f},{macro.specificity_mean:.3f},{macro.specificity_std:.3f},{macro.tp_rate_mean:.3f},{macro.tp_rate_std:.3f},{macro.fp_rate_mean:.3f},{macro.fp_rate_std:.3f}\n")
 
+def example_confusion_matrices(directory, models, datasets):
+    for dataset in datasets:
+        for model_class in models:
+            train_set, test_set = dataset.train_test_split(0.6)
+            model = model_class.train(train_set)
+            predictions = model.predict(test_set.attributes)
+            confusion_matrix = ConfusionMatrix.from_labels(test_set.labels, predictions)
+
+            filename = f"{directory}/{model_class.__name__}_{dataset.name}.csv"
+            save_confusion_matrix_to_csv(confusion_matrix, filename)
+
+
+def save_confusion_matrix_to_csv(confusion_matrix, filename):
+    labels = confusion_matrix.labels()
+    matrix = confusion_matrix.matrix
+
+    with open(filename, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+
+        writer.writerow([""] + labels)
+
+        for label in labels:
+            row = [label] + [matrix[label][col_label] for col_label in labels]
+            writer.writerow(row)
+
 def main():
     datasets = [
         Dataset.load_from_file("datasets/car+evaluation/car.data", label_col_idx=6),
         Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0),
-        Dataset.load_from_file("datasets/national+poll+on+healthy+aging+(npha)/NPHA-doctor-visits.csv", label_col_idx=0)
+        Dataset.load_from_file("datasets/national+poll+on+healthy+aging+(npha)/NPHA-doctor-visits.csv", label_col_idx=0, skip_header=True),
     ]
 
     models = [
@@ -56,8 +82,8 @@ def main():
         OneVsOneClassifier
     ]
 
-    generate_csv_report("results.csv", models, datasets)
-
+    generate_csv_report("results/metrics.csv", models, datasets)
+    example_confusion_matrices("results/confusion-matrices", models, datasets)
 
 if __name__ == '__main__':
     main()
