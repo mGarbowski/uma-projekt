@@ -37,13 +37,16 @@ def main():
     nursery = Dataset.load_from_file("datasets/nursery/nursery.data", label_col_idx=8)
     balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0)
 
-    datasets = [(car_evaluation, "car evaluation"), (nursery, "nursery"), (balance_scale, "balance scale")]
+    datasets = [
+        car_evaluation,
+        nursery,
+        balance_scale,
+    ]
     models = [RandomClassifier, ID3Classifier, OneVsRestClassifier, OneVsOneClassifier]
 
-    for named_dataset in datasets:
-        dataset, dataset_name = named_dataset
+    for dataset in datasets:
         for model in models:
-            print(f"Model: {model.__name__}, Dataset: {dataset_name}")
+            print(f"Model: {model.__name__}, Dataset: {dataset.name}")
             micro, macro = kcv(model, dataset, 5)
             print(f"Micro-averaged results: {micro}")
             print(f"Macro-averaged results: {macro}")

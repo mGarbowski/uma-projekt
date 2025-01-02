@@ -20,10 +20,11 @@ class Dataset:
     attributes and classes are of equal length
     """
 
+    _name: str | None
     _attributes: list[RowAttributes]
     _labels: list[Label]
 
-    def __init__(self, attributes: list[RowAttributes] = None, labels: list[Label] = None):
+    def __init__(self, attributes: list[RowAttributes] = None, labels: list[Label] = None, name: str = None):
         if attributes is None and labels is None:
             self._attributes = []
             self._labels = []
@@ -32,6 +33,7 @@ class Dataset:
         if len(attributes) != len(labels):
             raise ValueError("Attributes and labels must have equal length")
 
+        self._name = name
         self._attributes = attributes if attributes is not None else []
         self._labels = labels if labels is not None else []
 
@@ -40,6 +42,10 @@ class Dataset:
 
     def __getitem__(self, index: int) -> tuple[RowAttributes, Label]:
         return self._attributes[index], self._labels[index]
+
+    @property
+    def name(self) -> str:
+        return self._name
 
     @property
     def attributes(self) -> list[RowAttributes]:
@@ -149,7 +155,6 @@ class Dataset:
         test_set = Dataset(test_attributes, test_labels)
         return train_set, test_set
 
-
     @classmethod
     def load_from_file(cls, file_path: str, label_col_idx: int = 0) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:
@@ -163,4 +168,5 @@ class Dataset:
                 attributes.append(attrs)
                 labels.append(label)
 
-            return cls(attributes, labels)
+            name = file_path.split("/")[-1]
+            return cls(attributes, labels, name)
