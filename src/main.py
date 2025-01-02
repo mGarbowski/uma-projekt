@@ -33,9 +33,9 @@ def experiment_train_test_split():
 
 
 def main():
-    car_evaluation = Dataset.load_from_file("datasets/car+evaluation/car.data")
-    nursery = Dataset.load_from_file("datasets/nursery/nursery.data")
-    balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data")
+    car_evaluation = Dataset.load_from_file("datasets/car+evaluation/car.data", label_col_idx=6)
+    nursery = Dataset.load_from_file("datasets/nursery/nursery.data", label_col_idx=8)
+    balance_scale = Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0)
 
     datasets = [(car_evaluation, "car evaluation"), (nursery, "nursery"), (balance_scale, "balance scale")]
     models = [RandomClassifier, ID3Classifier, OneVsRestClassifier, OneVsOneClassifier]
