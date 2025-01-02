@@ -2,6 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{csvsimple} % Csv tables
 \usepackage{adjustbox}
+\usepackage{hyperref}
 \usepackage[polish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[margin=0.5in]{geometry}
@@ -112,6 +113,60 @@ dla każdej klasy obliczamy sumę pewności głosów \textit{za} i dopełnienia 
 \section{Zbiory danych}
 
 
+\subsection{\href{https://archive.ics.uci.edu/dataset/19/car+evaluation}{Car Evaluation}}
+
+
+
+Celem zbioru jest klasyfikacja samochodów na podstawie ich cech, takich jak cena, koszty utrzymania czy pojemność pasażerska, do jednej z czterech kategorii akceptowalności
+
+\begin{itemize}
+    \item unacc
+    \item acc
+    \item good
+    \item vgood
+\end{itemize}
+
+\subsubsection*{Charakterystyka zbioru danych:}
+\\
+\textbf{Liczba próbek:} 1728 \\
+\textbf{Liczba cech:} 6 atrybutów wejściowych + 1 cecha docelowa \\
+\textbf{Typy danych:} kategoryczne \\
+
+\subsection{\href{https://archive.ics.uci.edu/dataset/12/balance+scale}{Balance Scale}}
+
+Celem zbioru jest klasyfikacja stanu równowagi szalki wagi na podstawie masy i odległości obiektów umieszczonych na jej lewym i prawym ramieniu. Każda próbka jest przypisywana do jednej z trzech kategorii:
+\begin{itemize}
+    \item \texttt{L} (szalka przechylona w lewo),
+    \item \texttt{B} (szalka w równowadze),
+    \item \texttt{R} (szalka przechylona w prawo).
+\end{itemize}
+
+\subsubsection*{Charakterystyka zbioru danych:}
+
+\begin{itemize}
+    \item \textbf{Liczba próbek:} 625
+    \item \textbf{Liczba cech:} 4 atrybuty wejściowe + 1 cecha docelowa
+    \item \textbf{Typy danych:} kategoryczne
+\end{itemize}
+
+\subsection{\href{https://archive.ics.uci.edu/dataset/936/national+poll+on+healthy+aging+(npha)}{National Poll on Healthy Aging (NPHA)}}
+
+Celem zbioru jest przewidywanie liczby odwiedzanych lekarzy przez Amerykanów powyżej 50 roku życia na podstawie odpowiedzi respondentów w ankiecie na temat ich zdrowia. Liczba lekarzy jest sprowadzona do 3 kategorii:
+\begin{itemize}
+    \item 1 - 0 lub 1
+    \item 2 - 2 lub 3
+    \item 3 - 4 lub więcej
+\end{itemize}
+
+\subsubsection*{Charakterystyka zbioru danych:}
+
+\begin{itemize}
+    \item \textbf{Liczba próbek:} 714
+    \item \textbf{Liczba cech:} 14 atrybutów wejściowych + 1 cecha docelowa
+    \item \textbf{Typy danych:} kategoryczne
+\end{itemize}
+
+Żaden z powyższych zestawów danych nie posiada brakujących danych.
 
 \section{Macierze pomyłek}
 Przykładowe macierze pomyłek dla wszystkich zbiorów danych i klasyfikatorów.
@@ -224,6 +279,6 @@ Uzupełnienie: przy obliczaniu miar jakości klasyfikacji stosujemy k-krotną wa
 Zrezygnowaliśmy z wykreślania krzywych ROC i wyliczania AUC ze względu na problem ze zdefiniowaniem progu odcięcia dla rozważanych
 modeli klasyfikacji.
 
-Zbiór danych \textbf{nursery} zastąpiliśmy zbiorem \textbf{NHPA}, ponieważ wszystkie modele osiągały na nim dokładność zbliżoną do $100\%$
+Zbiór danych \textbf{nursery} zastąpiliśmy zbiorem \textbf{NPHA}, ponieważ wszystkie modele osiągały na nim dokładność zbliżoną do $100\%$
 
 \end{document}
