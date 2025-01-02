@@ -11,4 +11,3 @@ Stosunek liczby prawdziwie pozytywnych wyników do liczby wszystkich przypadków
 $$ Precision = \dfrac{TP}{TP + FP} $$
 
 ## Wyniki
-Wszystkie klasyfikatory, dla zbiorów car evaluation, nursery uzyskują gorsze wyniki niż klasyfikator losowy
