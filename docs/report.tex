@@ -109,6 +109,9 @@ C     & 0,9 = (1-0,8) + 0,7 \\ \hline
 Dla powyższego przykładu predykcją zespołu klasyfikatorów byłaby klasa A, ponieważ choć wszystkie uzyskały po 1 głosie,
 dla każdej klasy obliczamy sumę pewności głosów \textit{za} i dopełnienia do 1 pewności głosów \textit{przeciw}.
 
+\section{Zbiory danych}
+
+
 
 \section{Macierze pomyłek}
 Przykładowe macierze pomyłek dla wszystkich zbiorów danych i klasyfikatorów.
@@ -213,5 +216,14 @@ k-krotnej walidacji krzyżowej z $k=5$.
     \end{adjustbox}
     \label{tab:metrics-micro-2}
 \end{table}
+
+\section{Odstępstwa od dokumentacji wstępnej}
+
+Uzupełnienie: przy obliczaniu miar jakości klasyfikacji stosujemy k-krotną walidację krzyżową z $k=5$ (średnie i odchylenia standardowe).
+
+Zrezygnowaliśmy z wykreślania krzywych ROC i wyliczania AUC ze względu na problem ze zdefiniowaniem progu odcięcia dla rozważanych
+modeli klasyfikacji.
+
+Zbiór danych \textbf{nursery} zastąpiliśmy zbiorem \textbf{NHPA}, ponieważ wszystkie modele osiągały na nim dokładność zbliżoną do $100\%$
 
 \end{document}
