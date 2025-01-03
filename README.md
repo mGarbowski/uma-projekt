@@ -64,5 +64,5 @@ python -m pytest
 ## Wykorzystane zbiory danych
 
 * Bohanec, M. (1988). Car Evaluation [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5JP48.
-* Rajkovic, V. (1989). Nursery [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5P88W.
+* National Poll on Healthy Aging (NPHA) [Dataset]. (2017). UCI Machine Learning Repository. https://doi.org/10.3886/ICPSR37305.v1.
 * Siegler, R. (1976). Balance Scale [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5488X.
