@@ -1,9 +1,9 @@
 from math import log
 
-from pytest import approx, raises
+from pytest import approx, raises, fixture
 
 from src.classifiers.id3 import Dataset, entropy, most_common_element, build_decision_tree, best_split_idx, \
-    information_gain, entropy_after_split
+    information_gain, entropy_after_split, ID3Classifier, WeightedPrediction
 
 
 class TestEntropy:
@@ -171,3 +171,68 @@ class TestBuildDecisionTree:
         assert node_b_3.is_leaf()
         assert node_b_3.leaf_label == "1"
         assert node_b_3.weight == 1
+
+
+@fixture()
+def trained_model():
+    dataset = Dataset(
+        [("A", "1"), ("B", "1"), ("B", "2"), ("B", "2"), ("B", "3")],
+        ["0", "1", "1", "0", "1"]
+    )
+
+    return ID3Classifier.train(dataset)
+
+
+class TestID3Classifier:
+    def test_name(self):
+        assert ID3Classifier.name() == "ID3"
+
+    def test_predict_with_attribute_value_not_present_in_train_set(self, trained_model):
+        assert trained_model.predict_single_with_weight(("A", "4")) == WeightedPrediction("0", 1)
+        assert trained_model._root.children["A"].most_common_label == "0"
+        assert trained_model._root.children["A"].weight == 1
+
+        assert trained_model.predict_single_with_weight(("C", "2")) == WeightedPrediction("1", 0.6)
+        assert trained_model._root.most_common_label == "1"
+        assert trained_model._root.weight == 0.6
+
+    def test_predict_single(self, trained_model):
+        assert trained_model.predict_single(("A", "1")) == "0"
+        assert trained_model.predict_single(("A", "2")) == "0"
+        assert trained_model.predict_single(("A", "3")) == "0"
+
+        assert trained_model.predict_single(("B", "1")) == "1"
+        assert trained_model.predict_single(("B", "2")) == "1"
+        assert trained_model.predict_single(("B", "3")) == "1"
+
+    def test_predict_single_with_weight(self, trained_model):
+        assert trained_model.predict_single_with_weight(("A", "1")) == WeightedPrediction("0", 1)
+        assert trained_model.predict_single_with_weight(("A", "2")) == WeightedPrediction("0", 1)
+        assert trained_model.predict_single_with_weight(("A", "3")) == WeightedPrediction("0", 1)
+
+        assert trained_model.predict_single_with_weight(("B", "1")) == WeightedPrediction("1", 1)
+        assert trained_model.predict_single_with_weight(("B", "2")) == WeightedPrediction("1", 0.5)
+        assert trained_model.predict_single_with_weight(("B", "3")) == WeightedPrediction("1", 1)
+
+    def test_predict_with_weights(self, trained_model):
+        predictions = trained_model.predict_with_weights([
+            ("A", "1"), ("A", "2"), ("A", "3"),
+            ("B", "1"), ("B", "2"), ("B", "3")
+        ])
+
+        assert predictions == [
+            WeightedPrediction("0", 1),
+            WeightedPrediction("0", 1),
+            WeightedPrediction("0", 1),
+            WeightedPrediction("1", 1),
+            WeightedPrediction("1", 0.5),
+            WeightedPrediction("1", 1)
+        ]
+
+    def test_predict(self, trained_model):
+        predictions = trained_model.predict([
+            ("A", "1"), ("A", "2"), ("A", "3"),
+            ("B", "1"), ("B", "2"), ("B", "3")
+        ])
+
+        assert predictions == ["0", "0", "0", "1", "1", "1"]
