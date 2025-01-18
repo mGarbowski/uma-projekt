@@ -61,6 +61,13 @@ python -m src.main
 python -m pytest
 ```
 
+### Raport pokrycia kodu testami
+
+```bash
+coverage run -m pytest
+coverage report -m
+```
+
 ## Wykorzystane zbiory danych
 
 * Bohanec, M. (1988). Car Evaluation [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5JP48.
