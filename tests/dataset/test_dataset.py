@@ -1,6 +1,15 @@
-from pytest import raises
+from pytest import raises, fixture
 
 from src.dataset.dataset import Dataset
+
+
+@fixture
+def kcv_dataset():
+    return Dataset([
+        ("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
+        ("10", "10")],
+        ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
+    )
 
 
 class TestDataset:
@@ -76,55 +85,39 @@ class TestDataset:
         assert dataset.attributes.index(("5", "6")) == dataset.labels.index("C")
         assert dataset.attributes.index(("7", "8")) == dataset.labels.index("D")
 
-    def test_kcv_split(self):
-        dataset = Dataset(
-            [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
-             ("10", "10")],
-            ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
-        )
-        train_set, test_set = dataset.kcv_split(3, 0)
+    def test_kcv_split(self, kcv_dataset):
+        train_set, test_set = kcv_dataset.kcv_split(3, 0)
         assert train_set == Dataset([("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"), ("10", "10")],
                                     ["B", "B", "B", "B", "C", "C"])
         assert test_set == Dataset([("1", "1"), ("2", "2"), ("3", "3"), ("4", "4")], ["A", "A", "A", "A"])
 
-        train_set, test_set = dataset.kcv_split(3, 1)
+        train_set, test_set = kcv_dataset.kcv_split(3, 1)
         assert train_set == Dataset(
             [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("8", "8"), ("9", "9"), ("10", "10")],
             ["A", "A", "A", "A", "B", "C", "C"])
         assert test_set == Dataset([("5", "5"), ("6", "6"), ("7", "7")], ["B", "B", "B"])
 
-        train_set, test_set = dataset.kcv_split(3, 2)
+        train_set, test_set = kcv_dataset.kcv_split(3, 2)
         assert train_set == Dataset(
             [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7")],
             ["A", "A", "A", "A", "B", "B", "B"])
         assert test_set == Dataset([("8", "8"), ("9", "9"), ("10", "10")], ["B", "C", "C"])
 
-    def test_kcv_split_invalid_k(self):
-        dataset = Dataset(
-            [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
-             ("10", "10")],
-            ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
-        )
+    def test_kcv_split_invalid_k(self, kcv_dataset):
         with raises(ValueError):
-            dataset.kcv_split(0, 0)
+            kcv_dataset.kcv_split(0, 0)
         with raises(ValueError):
-            dataset.kcv_split(-1, 0)
+            kcv_dataset.kcv_split(-1, 0)
         with raises(ValueError):
-            dataset.kcv_split(1, 0)
+            kcv_dataset.kcv_split(1, 0)
         with raises(ValueError):
-            dataset.kcv_split(11, 0)
+            kcv_dataset.kcv_split(11, 0)
 
-    def test_kcv_split_invalid_i(self):
-        dataset = Dataset(
-            [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
-             ("10", "10")],
-            ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
-        )
-
+    def test_kcv_split_invalid_i(self, kcv_dataset):
         with raises(ValueError):
-            dataset.kcv_split(3, -1)
+            kcv_dataset.kcv_split(3, -1)
         with raises(ValueError):
-            dataset.kcv_split(3, 3)
+            kcv_dataset.kcv_split(3, 3)
 
     def test_attributes_and_labels_must_have_equal_length(self):
         with raises(ValueError):
