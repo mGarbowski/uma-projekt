@@ -31,10 +31,10 @@ class TestOneVsOneClassifier:
     def test_creates_trees_for_each_pair_of_classes(self):
         dataset = Dataset(
             [("A", "1"), ("B", "1"), ("B", "2"), ("B", "2"), ("B", "3")],
-            ["0", "1", "2", "0", "1"]
+            ["0", "1", "2", "3", "1"]
         )
         ovo_model = OneVsOneClassifier.train(dataset)
 
-        assert len(ovo_model._trees) == 3
-        assert len(get_pairs(dataset.unique_labels())) == 3
+        assert len(ovo_model._trees) == 6
+        assert len(get_pairs(dataset.unique_labels())) == 6
         assert all(isinstance(tree, ID3Classifier) for tree in ovo_model._trees.values())
