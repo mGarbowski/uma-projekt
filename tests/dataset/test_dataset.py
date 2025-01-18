@@ -1,3 +1,5 @@
+from pytest import raises
+
 from src.dataset.dataset import Dataset
 
 
@@ -96,3 +98,68 @@ class TestDataset:
             [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7")],
             ["A", "A", "A", "A", "B", "B", "B"])
         assert test_set == Dataset([("8", "8"), ("9", "9"), ("10", "10")], ["B", "C", "C"])
+
+    def test_kcv_split_invalid_k(self):
+        dataset = Dataset(
+            [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
+             ("10", "10")],
+            ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
+        )
+        with raises(ValueError):
+            dataset.kcv_split(0, 0)
+        with raises(ValueError):
+            dataset.kcv_split(-1, 0)
+        with raises(ValueError):
+            dataset.kcv_split(1, 0)
+        with raises(ValueError):
+            dataset.kcv_split(11, 0)
+
+    def test_kcv_split_invalid_i(self):
+        dataset = Dataset(
+            [("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"),
+             ("10", "10")],
+            ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C"]
+        )
+
+        with raises(ValueError):
+            dataset.kcv_split(3, -1)
+        with raises(ValueError):
+            dataset.kcv_split(3, 3)
+
+    def test_attributes_and_labels_must_have_equal_length(self):
+        with raises(ValueError):
+            Dataset([("1", "2"), ("5", "1"), ("6", "3")], ["A", "C", "B", "B"])
+
+    def test_train_test_split_invalid_ratio(self):
+        dataset = Dataset(
+            [("1", "2"), ("5", "1"), ("6", "3"), ("1", "2")],
+            ["A", "C", "B", "B"]
+        )
+        with raises(ValueError):
+            dataset.train_test_split(-1)
+        with raises(ValueError):
+            dataset.train_test_split(2)
+        with raises(ValueError):
+            dataset.train_test_split(1.5)
+
+    def test_train_test_split(self):
+        dataset = Dataset(
+            [("1", "2"), ("5", "1"), ("6", "3"), ("1", "2")],
+            ["A", "C", "B", "B"]
+        )
+
+        train_set, test_set = dataset.train_test_split(0.45)
+        assert len(train_set.labels) == len(train_set.attributes) == 1
+        assert len(test_set.labels) == len(test_set.attributes) == 3
+
+        train_set, test_set = dataset.train_test_split(0.5)
+        assert len(train_set.labels) == len(train_set.attributes) == 2
+        assert len(test_set.labels) == len(test_set.attributes) == 2
+
+        train_set, test_set = dataset.train_test_split(0.74)
+        assert len(train_set.labels) == len(train_set.attributes) == 2
+        assert len(test_set.labels) == len(test_set.attributes) == 2
+
+        train_set, test_set = dataset.train_test_split(0.76)
+        assert len(train_set.labels) == len(train_set.attributes) == 3
+        assert len(test_set.labels) == len(test_set.attributes) == 1

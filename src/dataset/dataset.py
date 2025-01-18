@@ -126,7 +126,7 @@ class Dataset:
         The first dataset in the pair is the sum of all parts except the i-th
         The second dataset in the pair is the i-th part
         """
-        if k <= 1:
+        if k <= 1 or k > len(self.attributes):
             raise ValueError("k must be greater than 1")
         if i < 0 or i >= k:
             raise ValueError("idx must be between 0 and k-1")
