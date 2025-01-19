@@ -63,8 +63,7 @@ def main():
     datasets = [
         Dataset.load_from_file("datasets/car+evaluation/car.data", label_col_idx=6, name="Car"),
         Dataset.load_from_file("datasets/balance+scale/balance-scale.data", label_col_idx=0, name="Balance-scale"),
-        Dataset.load_from_file("datasets/national+poll+on+healthy+aging+(npha)/NPHA-doctor-visits.csv", label_col_idx=0,
-                               name="NPHA", skip_header=True),
+        Dataset.load_from_file("datasets/primary+tumor/primary-tumor.data", label_col_idx=0, name="Primary tumor"),
     ]
 
     models = [

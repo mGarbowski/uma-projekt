@@ -1,0 +1,7 @@
+Model,Zbiór danych,Uśrednianie,Dokładność (avg),Dokładność (std),Odzysk (avg),Odzysk (std),Precyzja (avg),Precyzja (std),Miara F (avg),Miara F (std),Specyficzność (avg),Specyficzność (std),TP rate (avg),TP rate (std),FP rate (avg),FP rate (std)
+ID3,Nursery,micro,0.993,0.002,0.985,0.002,0.985,0.002,0.985,0.002,0.996,0.001,0.985,0.002,0.004,0.001
+ID3,Nursery,macro,0.993,0.002,0.842,0.101,0.840,0.101,0.840,0.101,0.995,0.001,0.842,0.101,0.005,0.001
+One-vs-Rest,Nursery,micro,0.993,0.002,0.983,0.004,0.983,0.004,0.983,0.004,0.995,0.001,0.983,0.004,0.005,0.001
+One-vs-Rest,Nursery,macro,0.993,0.002,0.851,0.102,0.833,0.112,0.841,0.108,0.995,0.002,0.851,0.102,0.005,0.002
+One-vs-One,Nursery,micro,0.993,0.002,0.984,0.004,0.984,0.004,0.984,0.004,0.995,0.001,0.984,0.004,0.005,0.001
+One-vs-One,Nursery,macro,0.993,0.002,0.876,0.098,0.872,0.100,0.874,0.099,0.995,0.001,0.876,0.098,0.005,0.001

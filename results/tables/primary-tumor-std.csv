@@ -1,0 +1,7 @@
+Model,Uśrednianie,Dokładność (std),Odzysk (std),Precyzja (std),Miara F (std),Specyficzność (std),TP rate (std),FP rate (std)
+ID3,macro,0.046,0.056,0.081,0.064,0.031,0.056,0.031
+One-vs-Rest,macro,0.04,0.049,0.056,0.05,0.022,0.049,0.022
+One-vs-One,macro,0.026,0.081,0.073,0.071,0.017,0.081,0.017
+ID3,micro,0.052,0.09,0.09,0.09,0.032,0.09,0.032
+One-vs-Rest,micro,0.049,0.073,0.073,0.073,0.032,0.073,0.032
+One-vs-One,micro,0.029,0.063,0.063,0.063,0.018,0.063,0.018

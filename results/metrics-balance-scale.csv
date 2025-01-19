@@ -1,0 +1,7 @@
+Model,Zbiór danych,Uśrednianie,Dokładność (avg),Dokładność (std),Odzysk (avg),Odzysk (std),Precyzja (avg),Precyzja (std),Miara F (avg),Miara F (std),Specyficzność (avg),Specyficzność (std),TP rate (avg),TP rate (std),FP rate (avg),FP rate (std)
+ID3,Balance-scale,micro,0.786,0.020,0.710,0.024,0.710,0.024,0.710,0.024,0.830,0.016,0.710,0.024,0.170,0.016
+ID3,Balance-scale,macro,0.791,0.018,0.515,0.013,0.487,0.029,0.500,0.018,0.809,0.020,0.515,0.013,0.191,0.020
+One-vs-Rest,Balance-scale,micro,0.779,0.029,0.702,0.036,0.702,0.036,0.702,0.036,0.825,0.024,0.702,0.036,0.175,0.024
+One-vs-Rest,Balance-scale,macro,0.784,0.027,0.508,0.026,0.483,0.027,0.494,0.025,0.802,0.024,0.508,0.026,0.198,0.024
+One-vs-One,Balance-scale,micro,0.748,0.026,0.664,0.030,0.664,0.030,0.664,0.030,0.798,0.022,0.664,0.030,0.202,0.022
+One-vs-One,Balance-scale,macro,0.751,0.026,0.481,0.016,0.478,0.020,0.477,0.016,0.778,0.020,0.481,0.016,0.222,0.020

@@ -1,0 +1,7 @@
+Model,Uśrednianie,Dokładność (avg),Odzysk (avg),Precyzja (avg),Miara F (avg),Specyficzność (avg),TP rate (avg),FP rate (avg)
+ID3,micro,0.96,0.922,0.922,0.922,0.973,0.922,0.027
+ID3,macro,0.96,0.847,0.829,0.836,0.963,0.847,0.037
+One-vs-Rest,micro,0.967,0.936,0.936,0.936,0.978,0.936,0.022
+One-vs-Rest,macro,0.967,0.855,0.868,0.859,0.967,0.855,0.033
+One-vs-One,micro,0.977,0.956,0.956,0.956,0.985,0.956,0.015
+One-vs-One,macro,0.978,0.953,0.946,0.948,0.977,0.953,0.023
