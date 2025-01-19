@@ -1,3 +1,8 @@
+<!-- 
+Generate PDF with
+pandoc dokumentacja-koncowa.md -o dokumentacja-koncowa.pdf -V geometry:margin=0.5in
+-->
+
 # UMA - Projekt
 
 Semestr 2024Z
@@ -117,6 +122,7 @@ TOTAL                                                644     54    92%
 
 ```
 
+\newpage
 ## Zbiory danych
 
 ### [Primary tumor](https://archive.ics.uci.edu/dataset/83/primary+tumor)
@@ -177,6 +183,7 @@ pasażerska, do jednej z czterech kategorii akceptowalności
 * typy danych kategoryczne
 * bez brakujących danych
 
+\newpage
 ### [Balance scale](https://archive.ics.uci.edu/dataset/12/balance+scale)
 
 Siegler, R. (1976). Balance Scale [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5488X.
@@ -196,6 +203,7 @@ lewym i prawym ramieniu. Każda próbka jest przypisywana do jednej z trzech kat
 * typy danych kategoryczne
 * bez brakujących danych
 
+\newpage
 ## Wyniki
 
 W ramach eksperymentu porównujemy działanie trzech klasyfikatorów: ID3, One vs Rest, One vs One na zbiorach danych
@@ -222,23 +230,23 @@ W tabelach pogrubiono najlepsze wartości w każdej kolumnie dla uśredniania mi
 
 ### Zbiór Primary tumor
 
-| Model       | Uśrednianie | Dokładność (avg) | Odzysk (avg) | Precyzja (avg) | Miara F (avg) | Specyficzność (avg) | TP rate (avg) | FP rate (avg) |
-|:------------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
-| ID3         | macro       |            0,854 |        0,231 |          0,235 |         0,217 |               0,911 |         0,231 |         0,089 |
-| One-vs-Rest | macro       |            0,822 |        0,207 |          0,215 |         0,194 |               0,896 |         0,207 |         0,104 |
-| One-vs-One  | macro       |        **0,863** |    **0,267** |      **0,263** |     **0,258** |           **0,917** |     **0,267** |     **0,083** |
-| ID3         | micro       |            0,843 |        0,392 |          0,392 |         0,392 |               0,909 |         0,392 |         0,091 |
-| One-vs-Rest | micro       |            0,807 |        0,333 |          0,333 |         0,333 |               0,887 |         0,333 |         0,113 |
-| One-vs-One  | micro       |        **0,854** |    **0,413** |      **0,413** |     **0,413** |           **0,916** |     **0,413** |     **0,084** |
+| Model | Uśrednianie | Dokładność (avg) | Odzysk (avg) | Precyzja (avg) | Miara F (avg) | Specyficzność (avg) | TP rate (avg) | FP rate (avg) |
+|:------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
+| ID3   | macro       |            0,854 |        0,231 |          0,235 |         0,217 |               0,911 |         0,231 |         0,089 |
+| OvR   | macro       |            0,822 |        0,207 |          0,215 |         0,194 |               0,896 |         0,207 |         0,104 |
+| OvO   | macro       |        **0,863** |    **0,267** |      **0,263** |     **0,258** |           **0,917** |     **0,267** |     **0,083** |
+| ID3   | micro       |            0,843 |        0,392 |          0,392 |         0,392 |               0,909 |         0,392 |         0,091 |
+| OvR   | micro       |            0,807 |        0,333 |          0,333 |         0,333 |               0,887 |         0,333 |         0,113 |
+| OvO   | micro       |        **0,854** |    **0,413** |      **0,413** |     **0,413** |           **0,916** |     **0,413** |     **0,084** |
 
-| Model       | Uśrednianie | Dokładność (std) | Odzysk (std) | Precyzja (std) | Miara F (std) | Specyficzność (std) | TP rate (std) | FP rate (std) |
-|:------------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
-| ID3         | macro       |            0,046 |        0,056 |          0,081 |         0,064 |               0,031 |         0,056 |         0,031 |
-| One-vs-Rest | macro       |            0,040 |        0,049 |          0,056 |         0,050 |               0,022 |         0,049 |         0,022 |
-| One-vs-One  | macro       |            0,026 |        0,081 |          0,073 |         0,071 |               0,017 |         0,081 |         0,017 |
-| ID3         | micro       |            0,052 |        0,090 |          0,090 |         0,090 |               0,032 |         0,090 |         0,032 |
-| One-vs-Rest | micro       |            0,049 |        0,073 |          0,073 |         0,073 |               0,032 |         0,073 |         0,032 |
-| One-vs-One  | micro       |            0,029 |        0,063 |          0,063 |         0,063 |               0,018 |         0,063 |         0,018 |
+| Model | Uśrednianie | Dokładność (std) | Odzysk (std) | Precyzja (std) | Miara F (std) | Specyficzność (std) | TP rate (std) | FP rate (std) |
+|:------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
+| ID3   | macro       |            0,046 |        0,056 |          0,081 |         0,064 |               0,031 |         0,056 |         0,031 |
+| OvR   | macro       |            0,040 |        0,049 |          0,056 |         0,050 |               0,022 |         0,049 |         0,022 |
+| OvO   | macro       |            0,026 |        0,081 |          0,073 |         0,071 |               0,017 |         0,081 |         0,017 |
+| ID3   | micro       |            0,052 |        0,090 |          0,090 |         0,090 |               0,032 |         0,090 |         0,032 |
+| OvR   | micro       |            0,049 |        0,073 |          0,073 |         0,073 |               0,032 |         0,073 |         0,032 |
+| OvO   | micro       |            0,029 |        0,063 |          0,063 |         0,063 |               0,018 |         0,063 |         0,018 |
 
 Zbiór Primary tumor posiada znaczną liczbę klas - 22, część z nich ma niewielką liczebność, a samych przykładów jest
 stosunkowo niewiele (339).
@@ -253,25 +261,26 @@ Natomiast wiele ze składowych modeli OvO będzie trenowanych na bardzo małych 
 Wszystkie modele osiągają wysoką dokładność powyżej 80%, jednak niską precyzję i odzysk, wartości odzysku, precyzji
 i miary F są znacznie niższe przy makro-uśrednianiu ze względu na występowanie w zbiorze wielu mało licznych klas.
 
+\newpage
 ### Zbiór Car evaluation
 
-| Model       | Uśrednianie | Dokładność (avg) | Odzysk (avg) | Precyzja (avg) | Miara F (avg) | Specyficzność (avg) | TP rate (avg) | FP rate (avg) |
-|:------------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
-| ID3         | macro       |            0,960 |        0,847 |          0,829 |         0,836 |               0,963 |         0,847 |         0,037 |
-| One-vs-Rest | macro       |            0,967 |        0,855 |          0,868 |         0,859 |               0,967 |         0,855 |         0,033 |
-| One-vs-One  | macro       |        **0,978** |    **0,953** |      **0,946** |     **0,948** |           **0,977** |     **0,953** |     **0,023** |
-| ID3         | micro       |            0,960 |        0,922 |          0,922 |         0,922 |               0,973 |         0,922 |         0,027 |
-| One-vs-Rest | micro       |            0,967 |        0,936 |          0,936 |         0,936 |               0,978 |         0,936 |         0,022 |
-| One-vs-One  | micro       |        **0,977** |    **0,956** |      **0,956** |     **0,956** |           **0,985** |     **0,956** |     **0,015** |
+| Model | Uśrednianie | Dokładność (avg) | Odzysk (avg) | Precyzja (avg) | Miara F (avg) | Specyficzność (avg) | TP rate (avg) | FP rate (avg) |
+|:------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
+| ID3   | macro       |            0,960 |        0,847 |          0,829 |         0,836 |               0,963 |         0,847 |         0,037 |
+| OvR   | macro       |            0,967 |        0,855 |          0,868 |         0,859 |               0,967 |         0,855 |         0,033 |
+| OvO   | macro       |        **0,978** |    **0,953** |      **0,946** |     **0,948** |           **0,977** |     **0,953** |     **0,023** |
+| ID3   | micro       |            0,960 |        0,922 |          0,922 |         0,922 |               0,973 |         0,922 |         0,027 |
+| OvR   | micro       |            0,967 |        0,936 |          0,936 |         0,936 |               0,978 |         0,936 |         0,022 |
+| OvO   | micro       |        **0,977** |    **0,956** |      **0,956** |     **0,956** |           **0,985** |     **0,956** |     **0,015** |
 
-| Model       | Uśrednianie | Dokładność (std) | Odzysk (std) | Precyzja (std) | Miara F (std) | Specyficzność (std) | TP rate (std) | FP rate (std) |
-|:------------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
-| ID3         | macro       |            0,001 |        0,021 |          0,019 |         0,013 |               0,007 |         0,021 |         0,007 |
-| One-vs-Rest | macro       |            0,005 |        0,046 |          0,036 |         0,037 |               0,004 |         0,046 |         0,004 |
-| One-vs-One  | macro       |            0,005 |        0,028 |          0,014 |         0,016 |               0,008 |         0,028 |         0,008 |
-| ID3         | micro       |            0,001 |        0,003 |          0,003 |         0,003 |               0,001 |         0,003 |         0,001 |
-| One-vs-Rest | micro       |            0,005 |        0,010 |          0,010 |         0,010 |               0,004 |         0,010 |         0,004 |
-| One-vs-One  | micro       |            0,005 |        0,009 |          0,009 |         0,009 |               0,003 |         0,009 |         0,003 |
+| Model | Uśrednianie | Dokładność (std) | Odzysk (std) | Precyzja (std) | Miara F (std) | Specyficzność (std) | TP rate (std) | FP rate (std) |
+|:------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
+| ID3   | macro       |            0,001 |        0,021 |          0,019 |         0,013 |               0,007 |         0,021 |         0,007 |
+| OvR   | macro       |            0,005 |        0,046 |          0,036 |         0,037 |               0,004 |         0,046 |         0,004 |
+| OvO   | macro       |            0,005 |        0,028 |          0,014 |         0,016 |               0,008 |         0,028 |         0,008 |
+| ID3   | micro       |            0,001 |        0,003 |          0,003 |         0,003 |               0,001 |         0,003 |         0,001 |
+| OvR   | micro       |            0,005 |        0,010 |          0,010 |         0,010 |               0,004 |         0,010 |         0,004 |
+| OvO   | micro       |            0,005 |        0,009 |          0,009 |         0,009 |               0,003 |         0,009 |         0,003 |
 
 W zbiorze Car evaluation wyraźnie dominuje klasa `unacc` (70%), a klasy `good` i `vgood` są mało liczne (po 4%).
 
@@ -288,25 +297,26 @@ Model OvR jest tylko nieznacznie lepszy od ID3 przy większym nakładzie oblicze
 Model OvO jest dla tego zadania najlepszym wyborem, szczególnie jeśli istotna jest precyzja dla mniej licznych klas
 `good` i `vgood`.
 
+\newpage
 ### Zbiór Balance scale
 
-| Model       | Uśrednianie | Dokładność (avg) | Odzysk (avg) | Precyzja (avg) | Miara F (avg) | Specyficzność (avg) | TP rate (avg) | FP rate (avg) |
-|:------------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
-| ID3         | macro       |        **0,791** |    **0,515** |      **0,487** |     **0,500** |           **0,809** |     **0,515** |     **0,191** |
-| One-vs-Rest | macro       |            0,784 |        0,508 |          0,483 |         0,494 |               0,802 |         0,508 |         0,198 |
-| One-vs-One  | macro       |            0,751 |        0,481 |          0,478 |         0,477 |               0,778 |         0,481 |         0,222 |
-| ID3         | micro       |        **0,786** |    **0,710** |      **0,710** |     **0,710** |           **0,830** |     **0,710** |     **0,170** |
-| One-vs-Rest | micro       |            0,779 |        0,702 |          0,702 |         0,702 |               0,825 |         0,702 |         0,175 |
-| One-vs-One  | micro       |            0,748 |        0,664 |          0,664 |         0,664 |               0,798 |         0,664 |         0,202 |
+| Model | Uśrednianie | Dokładność (avg) | Odzysk (avg) | Precyzja (avg) | Miara F (avg) | Specyficzność (avg) | TP rate (avg) | FP rate (avg) |
+|:------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
+| ID3   | macro       |        **0,791** |    **0,515** |      **0,487** |     **0,500** |           **0,809** |     **0,515** |     **0,191** |
+| OvR   | macro       |            0,784 |        0,508 |          0,483 |         0,494 |               0,802 |         0,508 |         0,198 |
+| OvO   | macro       |            0,751 |        0,481 |          0,478 |         0,477 |               0,778 |         0,481 |         0,222 |
+| ID3   | micro       |        **0,786** |    **0,710** |      **0,710** |     **0,710** |           **0,830** |     **0,710** |     **0,170** |
+| OvR   | micro       |            0,779 |        0,702 |          0,702 |         0,702 |               0,825 |         0,702 |         0,175 |
+| OvO   | micro       |            0,748 |        0,664 |          0,664 |         0,664 |               0,798 |         0,664 |         0,202 |
 
-| Model       | Uśrednianie | Dokładność (std) | Odzysk (std) | Precyzja (std) | Miara F (std) | Specyficzność (std) | TP rate (std) | FP rate (std) |
-|:------------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
-| ID3         | macro       |            0,018 |        0,013 |          0,029 |         0,018 |               0,020 |         0,013 |         0,020 |
-| One-vs-Rest | macro       |            0,027 |        0,026 |          0,027 |         0,025 |               0,024 |         0,026 |         0,024 |
-| One-vs-One  | macro       |            0,026 |        0,016 |          0,020 |         0,016 |               0,020 |         0,016 |         0,020 |
-| ID3         | micro       |            0,020 |        0,024 |          0,024 |         0,024 |               0,016 |         0,024 |         0,016 |
-| One-vs-Rest | micro       |            0,029 |        0,036 |          0,036 |         0,036 |               0,024 |         0,036 |         0,024 |
-| One-vs-One  | micro       |            0,026 |        0,030 |          0,030 |         0,030 |               0,022 |         0,030 |         0,022 |
+| Model | Uśrednianie | Dokładność (std) | Odzysk (std) | Precyzja (std) | Miara F (std) | Specyficzność (std) | TP rate (std) | FP rate (std) |
+|:------|:------------|-----------------:|-------------:|---------------:|--------------:|--------------------:|--------------:|--------------:|
+| ID3   | macro       |            0,018 |        0,013 |          0,029 |         0,018 |               0,020 |         0,013 |         0,020 |
+| OvR   | macro       |            0,027 |        0,026 |          0,027 |         0,025 |               0,024 |         0,026 |         0,024 |
+| OvO   | macro       |            0,026 |        0,016 |          0,020 |         0,016 |               0,020 |         0,016 |         0,020 |
+| ID3   | micro       |            0,020 |        0,024 |          0,024 |         0,024 |               0,016 |         0,024 |         0,016 |
+| OvR   | micro       |            0,029 |        0,036 |          0,036 |         0,036 |               0,024 |         0,036 |         0,024 |
+| OvO   | micro       |            0,026 |        0,030 |          0,030 |         0,030 |               0,022 |         0,030 |         0,022 |
 
 Zbiór balance scale zawiera trzy klasy, 2 z nich mają taką samą liczebność (46%), a jedna jest mniej liczna (8%).
 Ze względu na występowanie mało licznej klasy, wyniki dla uśredniania makro są znacznie niższe niż dla mikro.
@@ -323,6 +333,7 @@ Nie zaobserwowano istotnych różnic w miarach jakości dla zbiorów danych
 * [Nursery](https://archive.ics.uci.edu/dataset/76/nursery)
 * [NPHA](https://archive.ics.uci.edu/dataset/936/national+poll+on+healthy+aging+(npha))
 
+\newpage
 ### Wnioski zbiorcze
 
 W obrębie jednego eksperymentu modele zachowywały taką samą relację według wszystkich miar jakości.
