@@ -71,5 +71,5 @@ coverage report -m
 ## Wykorzystane zbiory danych
 
 * Bohanec, M. (1988). Car Evaluation [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5JP48.
-* National Poll on Healthy Aging (NPHA) [Dataset]. (2017). UCI Machine Learning Repository. https://doi.org/10.3886/ICPSR37305.v1.
 * Siegler, R. (1976). Balance Scale [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5488X.
+* Zwitter, M. & Soklic, M. (1987). Primary Tumor [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5WK5Q.
