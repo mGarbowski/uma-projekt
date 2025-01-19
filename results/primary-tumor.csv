@@ -1,7 +1,0 @@
-Model,Zbiór danych,Uśrednianie,Dokładność (avg),Dokładność (std),Odzysk (avg),Odzysk (std),Precyzja (avg),Precyzja (std),Miara F (avg),Miara F (std),Specyficzność (avg),Specyficzność (std),TP rate (avg),TP rate (std),FP rate (avg),FP rate (std)
-ID3,Primary tumor,micro,0.850,0.029,0.386,0.054,0.386,0.054,0.386,0.054,0.915,0.018,0.386,0.054,0.085,0.018
-ID3,Primary tumor,macro,0.862,0.025,0.222,0.028,0.220,0.056,0.209,0.038,0.916,0.017,0.222,0.028,0.084,0.017
-One-vs-Rest,Primary tumor,micro,0.789,0.044,0.309,0.065,0.309,0.065,0.309,0.065,0.875,0.028,0.309,0.065,0.125,0.028
-One-vs-Rest,Primary tumor,macro,0.809,0.035,0.193,0.055,0.171,0.056,0.171,0.048,0.884,0.021,0.193,0.055,0.116,0.021
-One-vs-One,Primary tumor,micro,0.866,0.034,0.442,0.058,0.442,0.058,0.442,0.058,0.924,0.021,0.442,0.058,0.076,0.021
-One-vs-One,Primary tumor,macro,0.875,0.031,0.298,0.038,0.274,0.034,0.274,0.030,0.925,0.018,0.298,0.038,0.075,0.018
