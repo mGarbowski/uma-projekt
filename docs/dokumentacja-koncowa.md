@@ -119,6 +119,22 @@ TOTAL                                                644     54    92%
 
 ## Zbiory danych
 
+### [Primary tumor](https://archive.ics.uci.edu/dataset/83/primary+tumor)
+
+Zwitter, M. & Soklic, M. (1987). Primary Tumor [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5WK5Q.
+
+TODO
+
+### [Car evaluation](https://archive.ics.uci.edu/dataset/19/car+evaluation)
+
+Bohanec, M. (1988). Car Evaluation [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5JP48.
+
+TODO
+
+### [Balance scale](https://archive.ics.uci.edu/dataset/12/balance+scale)
+
+Siegler, R. (1976). Balance Scale [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5488X.
+
 TODO
 
 ## Wyniki
@@ -136,12 +152,12 @@ Stosujemy 5-krotną walidację krzyżową.
 
 Dla każdej metryki podajemy wartość średnią i odchylenie standardowe uzyskane przy walidacji krzyżowej.
 
-### Inne przebadane zbiory
-Nie zaobserwowano istotnych różnic dla zbiorów danych
+W każdym eksperymencie prezentujemy wyniki w 2 tabelach
 
-* nursery
-* NPHA
-  * różnice na poziomie $0,02$ dla dokładności i miary F
+* Wartości średnie metryk dla poszczególnych modeli przy uśrednianiu mikro i makro
+* Wartości odchylenia standardowego metryk dla poszczególnych modeli przy uśrednianiu mikro i makro
+
+
 
 ### Zbiór Primary tumor
 
@@ -209,6 +225,12 @@ Wnioski TODO
 
 Wnioski TODO
 
+### Inne przebadane zbiory
+Nie zaobserwowano istotnych różnic w miarach jakości dla zbiorów danych
+
+* [Nursery](https://archive.ics.uci.edu/dataset/76/nursery)
+* [NPHA](https://archive.ics.uci.edu/dataset/936/national+poll+on+healthy+aging+(npha))
+
 ### Wnioski końcowe
 
 TODO
@@ -219,8 +241,6 @@ Uzupełnienie: przy obliczaniu miar jakości klasyfikacji stosujemy k-krotną wa
 odchylenia standardowe).
 
 Zrezygnowaliśmy z wykreślania krzywych ROC i wyliczania AUC ze względu na problem ze zdefiniowaniem progu odcięcia dla
-rozważanych
-modeli klasyfikacji.
+rozważanych modeli klasyfikacji.
 
-Zbiór danych **nursery** zastąpiliśmy zbiorem **NPHA**, ponieważ wszystkie modele osiągały na nim dokładność zbliżoną
-do $100%$
+Zbiór danych **nursery** zastąpiliśmy zbiorem **Primary tumor**.
