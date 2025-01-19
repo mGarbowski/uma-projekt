@@ -1,6 +1,9 @@
 """Dataset representing tabular data with attributes and labels
-Based on earlier assignment from course Wstęp do Sztucznej Inteligencji
+
+Based on assignment from course Wstęp do Sztucznej Inteligencji (2023Z)
 by Mikołaj Garbowski
+
+Authors: Mikołaj Garbowski, Michał Pałasz
 """
 
 import random
@@ -156,7 +159,8 @@ class Dataset:
         return train_set, test_set
 
     @classmethod
-    def load_from_file(cls, file_path: str, label_col_idx: int = 0, skip_header: bool = False, name: str = None) -> Self:
+    def load_from_file(cls, file_path: str, label_col_idx: int = 0, skip_header: bool = False,
+                       name: str = None) -> Self:
         with open(file_path, mode="rt", encoding="utf-8") as file:
             lines = file.readlines()
             if skip_header:

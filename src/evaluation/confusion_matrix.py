@@ -1,3 +1,5 @@
+"""Authors: Mikołaj Garbowski, Michał Pałasz"""
+
 from typing import Self
 
 

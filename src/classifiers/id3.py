@@ -1,15 +1,17 @@
 """ID3 decision tree classifier implementation
 
-Based on earlier assignment from course Wstęp do Sztucznej Inteligencji
+Based on assignment from course Wstęp do Sztucznej Inteligencji (2023Z)
 by Mikołaj Garbowski
+
+Authors: Mikołaj Garbowski, Michał Pałasz
 """
 
 import math
 from dataclasses import dataclass
 from typing import Self
 
-from src.dataset.dataset import Dataset, RowAttributes, Label
 from src.classifiers.classifier import Classifier
+from src.dataset.dataset import Dataset, RowAttributes, Label
 
 
 def entropy(dataset: Dataset) -> float:

@@ -1,3 +1,5 @@
+"""Authors: Mikołaj Garbowski, Michał Pałasz"""
+
 from dataclasses import dataclass
 from statistics import mean, stdev
 from typing import Self

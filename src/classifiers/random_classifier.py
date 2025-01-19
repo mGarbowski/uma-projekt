@@ -1,3 +1,5 @@
+"""Authors: Mikołaj Garbowski, Michał Pałasz"""
+
 import random
 from typing import Self
 

@@ -1,3 +1,5 @@
+"""Authors: Mikołaj Garbowski, Michał Pałasz"""
+
 import csv
 from pprint import pprint
 from typing import Type

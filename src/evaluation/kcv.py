@@ -1,3 +1,5 @@
+"""Authors: Mikołaj Garbowski, Michał Pałasz"""
+
 from typing import Type
 
 from src.classifiers.classifier import Classifier

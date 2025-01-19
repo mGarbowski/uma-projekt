@@ -1,3 +1,5 @@
+"""Authors: Mikołaj Garbowski, Michał Pałasz"""
+
 from abc import ABC, abstractmethod
 from typing import Self
 
