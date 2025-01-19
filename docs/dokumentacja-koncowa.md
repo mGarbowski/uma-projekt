@@ -124,19 +124,77 @@ TOTAL                                                644     54    92%
 Zwitter, M. & Soklic, M. (1987). Primary Tumor [Dataset]. UCI Machine Learning
 Repository. https://doi.org/10.24432/C5WK5Q.
 
-TODO
+Celem zbioru danych jest klasyfikacja rodzaju nowotworu na podstawie informacji o pacjencie i jego stanie zdrowia.
+
+* `lung` (25%)
+* `head & neck` (6%)
+* `esophasus` (3%)
+* `thyroid` (4%)
+* `stomach` (12%)
+* `duoden & sm.int` (0%)
+* `colon` (4%)
+* `rectum` (2%)
+* `anus` (0%)
+* `salivary glands` (1%)
+* `pancreas` (8%)
+* `gallblader` (5%)
+* `liver` (2%)
+* `kidney` (7%)
+* `bladder` (1%)
+* `testis` (0%)
+* `prostate` (3%)
+* `ovary` (9%)
+* `corpus uteri` (2%)
+* `cervix uteri` (1%)
+* `vagina` (0%)
+* `breast` (7%)
+
+#### Charakterystyka zbioru danych
+
+* liczba przykładów: 339
+* liczba atrybutów: 17
+* liczba klas: 22
+* typy danych kategoryczne
+* brakujące dane zastąpione wartościami `?`
 
 ### [Car evaluation](https://archive.ics.uci.edu/dataset/19/car+evaluation)
 
 Bohanec, M. (1988). Car Evaluation [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5JP48.
 
-TODO
+Celem zbioru jest klasyfikacja samochodów na podstawie ich cech, takich jak cena, koszty utrzymania czy pojemność
+pasażerska, do jednej z czterech kategorii akceptowalności
+
+* `unacc` (70%)
+* `acc` (22%)
+* `good` (4%)
+* `vgood` (4%)
+
+#### Charakterystyka zbioru danych
+
+* liczba przykładów: 1728
+* liczba atrybutów: 6
+* liczba klas: 4
+* typy danych kategoryczne
+* bez brakujących danych
 
 ### [Balance scale](https://archive.ics.uci.edu/dataset/12/balance+scale)
 
 Siegler, R. (1976). Balance Scale [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5488X.
 
-TODO
+Celem zbioru jest klasyfikacja stanu równowagi szalki wagi na podstawie masy i odległości obiektów umieszczonych na jej
+lewym i prawym ramieniu. Każda próbka jest przypisywana do jednej z trzech kategorii:
+
+* `L` (46%) - szalka przechyla się w lewo
+* `B` (8%) - szalka jest w równowadze
+* `R` (46%) - szalka przechyla się w prawo
+
+#### Charakterystyka zbioru danych
+
+* liczba przykładów: 625
+* liczba atrybutów: 4
+* liczba klas: 3
+* typy danych kategoryczne
+* bez brakujących danych
 
 ## Wyniki
 
