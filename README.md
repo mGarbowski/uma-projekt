@@ -19,14 +19,6 @@ czyli porównanie jakości wyników typowej implementacji ID3 z jakością wynik
 2) tworzymy osobny model binarny dla każdej pary klas (jedna klasa traktowana jako pozytywna, druga jako negatywna),
    predykcja przez głosowanie.
 
-Przed rozpoczęciem realizacji projektu proszę zapoznać się z
-zawartością: https://staff.elka.pw.edu.pl/~rbiedrzy/UMA/index.html.
-
-## Linki
-
-* [wytyczne prowadzącego](https://staff.elka.pw.edu.pl/~rbiedrzy/UMA/index.html)
-* [zasady realizacji projektu](http://elektron.elka.pw.edu.pl/~pcichosz/uma/uma-projekt-zasady.html)
-
 ## Uruchomienie i instalacja
 
 ### Utworzenie środowiska wirtualnego
